@@ -109,7 +109,7 @@
     background: #0099B1;
 }
 
-h1, h2:(.load_footer h2), h3:(.load_footer h3), h4 {
+h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     color: #fff;
