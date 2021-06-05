@@ -109,7 +109,8 @@ class Options {
                 url: "https://mark-code789.github.io/Smart Recharge/index.html"
             }).catch( (error) => { 
             	let message = error.toString().split(":");
-                alert(`There was an error while sharing.\n***Description***\n${message[0]}: ${message[1]}`);
+                if(message[0] != "AbortError") 
+                    alert(`There was an error while sharing.\n***Description***\n${message[0]}: ${message[1]}`);
             });
         } 
         else {
