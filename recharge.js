@@ -87,6 +87,10 @@ async function LoadingDone() {
         $(".contact_picker").classList.remove("disable", "enable");
         $(".contact_picker").classList.add("enable");
     } 
+    if(deferredEvent) {
+        $(".install_prompt").style.display = "block";
+        $(".install_prompt").classList.add("show_install_prompt");
+    } 
 } 
 
 const About = () => {
