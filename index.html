@@ -249,6 +249,7 @@ body {
             } 
             var deferredEvent;
             var tesseractLoaded = false;
+            var rechargeLoaded = false;
             
             function pageComplete () {
                 window.addEventListener("beforeinstallprompt", e => {
@@ -264,18 +265,28 @@ body {
                 SheetLink.rel = "stylesheet";
                 SheetLink.href = "recharge.css";
                 
+                JsLink0.onload = () => {
+                    scriptLoaded("recharge");
+                };
                 JsLink0.src = "recharge.js";
                 JsLink1.onload = () => {
-                    tesseractLoaded = true;
-                    if(Stream) {
-                        Stream.initTesseract();
-                    } 
+                    scriptLoaded("tesseract");
                 };
                 JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
 
                 head.appendChild(JsLink0);
                 head.appendChild(JsLink1);
                 head.appendChild(SheetLink);
+            } 
+            
+            function scriptLoaded = (type) => {
+                if(type == "tesseract")
+                    tesseractLoaded = true;
+                else
+                    rechargeLoaded = true;
+                    
+                if(tesseractLoaded && rechargeLoaded) 
+                    Stream.initTesseract();
             } 
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
