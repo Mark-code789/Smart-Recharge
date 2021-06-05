@@ -172,8 +172,6 @@ body {
                 window.addEventListener("beforeinstallprompt", e => {
                     e.preventDefault();
                     deferredEvent = e;
-                    $(".install_prompt").style.display = "block";
-                    $(".install_prompt").classList.add("show_install_prompt");
                 });
                 let head = document.head;
                 let SheetLink = $$$("link");
