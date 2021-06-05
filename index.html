@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
+        <meta name="theme-color" content="#0099B1">
+        <link rel="manifest" href="./manifest.webmanifest">
+        <title>SMART RECHARGE</title>
+        <style>
+* {
+    font-family: Arial;
+    box-sizing: border-box;
+    overflow: hidden;
+} 
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #000000, #373737);
+}
+        </style>
+    </head>
+    <body>
+        <div class="install_prompt" hidden>
+            <div class="head">
+                <div class="icon"></div>
+                <h2>Smart Recharge</h2>
+                <h3>Version info: V1.0</h3>
+                <p>Install Smart Recharge in your phone</p>
+            </div>
+            <div class="foot">
+                <button onclick="HideInstallPrompt()">CANCEL</button>
+                <button onclick="InstallApp()">INSTALL</button>
+            </div>
+        </div>
+        <article class="window main" hidden>
+            <div class="header">
+                <h1>SMART RECHARGE</h1>
+                <h2>Safaricom</h2>
+                <button class="about"></button>
+            </div>
+            <div class="sims">
+                <div class="sim">
+                    <input type="radio" name="sim-type" value="Safaricom" id="sim-1" checked>
+                </div>
+                <div class="sim">
+                    <input type="radio" name="sim-type" value="Airtel" id="sim-2">
+                </div>
+                <div class="sim">
+                    <input type="radio" name="sim-type" value="Telkom" id="sim-3">
+                </div>
+            </div>
+            <div class="footer">
+                <button>NEXT</button>
+                <button>TOP UP OTHER NUMBER</button>
+            </div>
+        </article>
+        <article class="window about_window" hidden>
+            <div class="head">
+                <div class="icon"></div>
+                <h2>Smart Recharge</h2>
+                <h3>Version info: V1.0</h3>
+            </div>
+            <div class="options">
+                <button>Share</button>
+                <hr>
+                <button>Feedback</button>
+                <hr>
+                <button>WhatsApp</button>
+                <hr>
+                <button>SoloLearn</button>
+            </div>
+            <div class="footer">
+                <button>BACK</button>
+            </div>
+        </article>
+        <article class="window other_number" hidden>
+            <div class="header">
+                <h1>SMART RECHARGE</h1>
+                <h2>Top up another number</h2>
+            </div>
+            <div class="input_form">
+                <label>Enter the receiver's phone number</label>
+                <div class="field">
+                    <input type="tel">
+                    <button class="contact_picker disable"></button>
+                </div>
+                <div class="footer">
+                    <button class="disable">NEXT</button>
+                    <button>CANCEL</button>
+                </div>
+            </div>
+        </article>
+        <article class="window scan" hidden>
+            <div class="header">
+                <h1>SMART RECHARGE</h1>
+                <h2>Scan the top up code</h2>
+                <h3>Align the digital code within the frame to scan</h3>
+            </div>
+            <div class="scanner">
+                <video autoplay></video>
+                <div class="scanner_frame">
+                    <div class="container_frame">
+                        <div class="corner_frame"></div>
+                        <div class="corner_frame"></div>
+                        <div class="corner_frame"></div>
+                        <div class="corner_frame"></div>
+                        <div class="laser"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="visible_footer">
+                <button class="flashlight flashlight_off"></button>
+                <button class="menu"></button>
+            </div>
+            <div class="hidden_footer">
+                <input type="text" placeholder="0123 4567 8912" disabled>
+                <div class="footer">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </article>
+        <script>
+            'use strict' 
+            const HideInstallPrompt = () => {
+                $(".install_prompt").classList.remove("show_install_prompt");
+                $(".install_prompt").classList.add("hide_install_prompt");
+                setTimeout(() => {$(".install_prompt").style.display = "none"}, 600);
+            } 
+            const InstallApp = async () => {
+                HideInstallPrompt();
+                deferredEvent.prompt();
+                const {outcome} = await deferredEvent.userChoice;
+                deferredEvent = null;
+            } 
+            function _$(elem, property) {
+                return window.getComputedStyle(elem, null).getPropertyValue(property);
+            } 
+            function _$$(child, parent) {
+                child = child.getBoundingClientRect();
+                if(parent) {
+                    let childTop = child.top;
+                    let childLeft = child.left;
+                    parent = parent.getBoundingClientRect();
+                    let parentTop = parent.top;
+                    let parentLeft = parent.left;
+                    let top = childTop - parentTop;
+                    let left = childLeft - parentLeft;
+                    return {top, left, width: child.width, height: child.height};
+                } 
+                else {
+                    return child;
+                } 
+            } 
+            function $(elem) {
+                return document.querySelector(elem);
+            } 
+
+            function $$(elem) {
+                return document.querySelectorAll(elem);
+            }
+            
+            function $$$(type) {
+                return document.createElement(type);
+            } 
+            var deferredEvent;
+            var tesseractLoaded = false;
+            
+            function pageComplete () {
+                window.addEventListener("beforeinstallprompt", e => {
+                    e.preventDefault();
+                    deferredEvent = e;
+                    $(".install_prompt").style.display = "block";
+                    $(".install_prompt").classList.add("show_install_prompt");
+                });
+                let head = document.head;
+                let SheetLink = $$$("link");
+                let JsLink0 = $$$("script");
+                let JsLink1 = $$$("script");
+                
+                SheetLink.type = "text/css";
+                SheetLink.rel = "stylesheet";
+                SheetLink.href = "recharge.css";
+                
+                JsLink0.src = "recharge.js";
+                JsLink1.onload = () => {
+                    tesseractLoaded = true
+                    Stream.initTesseract();
+                };
+                JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
+
+                head.appendChild(JsLink0);
+                head.appendChild(JsLink1);
+                head.appendChild(SheetLink);
+            } 
+			
+			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
+                if("serviceWorker" in navigator) {
+                	window.onload = _ => {
+                		navigator.serviceWorker.register("recharger_sw.js").then(res => {
+                			pageComplete();
+               	 	}).catch(error => {
+               		 	pageComplete();
+              		  });
+               	 } 
+                } 
+                else {
+                	alert("Can't Register an cache of this app because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. Another browser, preferably chrome.");
+                    window.onload = pageComplete();
+                } 
+           } 
+           else {
+               alert("This app is not compatible with your current browser. Try another browser preferably chrome.");
+           } 
+        </script>
+    </body>
+</html>
