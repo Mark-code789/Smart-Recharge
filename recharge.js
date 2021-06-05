@@ -143,8 +143,7 @@ class Options {
 const PickContact = async () => {
     try {
         let contact = await navigator.contacts.select(['tel']);
-        
-        if(contact.length > 0) {
+        if(contact.length > 0 && contact[0].tel.length > 0) {
             contact = contact[0].tel[0].replace(" ", "");
             Edit.tel(contact);
         } 
