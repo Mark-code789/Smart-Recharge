@@ -89,11 +89,12 @@ async function LoadingDone() {
         $(".contact_picker").classList.remove("disable", "enable");
         $(".contact_picker").classList.add("enable");
     } 
+    
     if(deferredEvent) {
-        //setTimeout(() => {
+        setTimeout(() => {
             $(".install_prompt").style.display = "block";
             $(".install_prompt").classList.add("show_install_prompt");
-        //}, 2000);
+        }, 1000);
     } 
 } 
 
