@@ -24,6 +24,10 @@
     padding: 5px 10px;
     margin: 0;
     background: #0099B1;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 3px #00434E; 
+    z-index: 100;
 } 
 
 .head {
@@ -43,10 +47,12 @@
 
 .head h2 {
     font-weight: 500;
+    font-size: 1.5rem
 } 
 
 .head h3 {
     font-size: 0.8rem;
+    font-weight: 400;
 } 
 
 .head p {
