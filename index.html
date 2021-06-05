@@ -267,12 +267,12 @@ body {
                 JsLink0.src = "recharge.js";
                 JsLink1.onload = () => {
                     tesseractLoaded = true;
-                    let it = setInterval(async () => {
+                    //let it = setInterval(async () => {
                         if(Stream) {
-                            await Stream.initTesseract();
-                            clearInterval(it);
+                            Stream.initTesseract();
+                            //clearInterval(it);
                         } 
-                    }, 100);
+                    //}, 100);
                 };
                 JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
 
