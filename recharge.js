@@ -54,6 +54,8 @@ async function load (i = 0) {
 }
 
 async function LoadingDone() {
+    $(".spinner").style.animationPlayState = "paused";
+    $(".load").style.display = "none";
     $(".main").style.display = "grid";
     $(".about").addEventListener("click", About, false);
     $(".contact_picker").addEventListener("click", PickContact, false);
