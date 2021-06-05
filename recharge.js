@@ -397,7 +397,7 @@ class Stream {
         //ctx.filter = 'contrast(0.5) brightness(0.5)';
         ctx.drawImage(this.video,left, top, width, height, 0, 0, width, height);
         this.snapshot = this.canvas.toDataURL("image/png");
-        $(".sims").style.backgroundImage = `url(${this.snapshot})`;
+        //$(".sims").style.backgroundImage = `url(${this.snapshot})`;
         console.log(width);
         await this.recognize(this.snapshot);
     } 
