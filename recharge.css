@@ -109,7 +109,7 @@
     background: #0099B1;
 }
 
-h1, h2, h3, h4 {
+h1, h2:(.load_footer h2), h3:(.load_footer h3), h4 {
     margin: 0;
     padding: 0;
     color: #fff;
@@ -128,7 +128,7 @@ h1, h2, h3, h4 {
     flex-flow: column wrap;
 } 
 
-.header > h2, h3 {
+.header > h2, .header h3 {
     width: 100%;
     margin-top: 5px;
     font-weight: 400;
@@ -286,7 +286,7 @@ input[type="radio"]:checked:after {
     padding: 20px;
 } 
 
-.about_window .head > h2, h3 {
+.about_window .head > h2, .about_window .head h3 {
     color: #676767;
 } 
 
