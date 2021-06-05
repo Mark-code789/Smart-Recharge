@@ -84,7 +84,7 @@ body {
 
 .load_footer h2 {
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.5rem;
 } 
 
 .load_footer h3 {
@@ -107,7 +107,7 @@ body {
                 <button onclick="InstallApp()">INSTALL</button>
             </div>
         </div>
-        <article class="load"> 
+        <article class="load" hidden> 
             <div class="load_footer">
                 <div class="load_icon"></div>
                 <h2>Smart Recharge</h2>
@@ -254,7 +254,6 @@ body {
                 window.addEventListener("beforeinstallprompt", e => {
                     e.preventDefault();
                     deferredEvent = e;
-                    alert("install event");
                 });
                 let head = document.head;
                 let SheetLink = $$$("link");
