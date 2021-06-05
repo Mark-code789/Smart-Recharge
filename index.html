@@ -254,6 +254,7 @@ body {
                 window.addEventListener("beforeinstallprompt", e => {
                     e.preventDefault();
                     deferredEvent = e;
+                    alert("install event");
                 });
                 let head = document.head;
                 let SheetLink = $$$("link");
