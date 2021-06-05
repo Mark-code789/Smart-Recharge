@@ -124,15 +124,18 @@ class Options {
         window.location.href = "mailto:marxeto8@gmail.com? &subject=Smart%20Recharge%20Feedback";
     } 
     static contact = e => {
+        if(navigator.onLine) 
         switch(e.target.innerHTML) {
             case "WhatsApp":
-            window.location.href = "https://api.whatsapp.com/send?phone=+254798916984";
+            window.location.href = "https://wa.me/+254798916984?";
             break;
             
             case "SoloLearn":
             window.location.href = "https://www.sololearn.com/Profile/14044895/?ref=app";
             break;
         } 
+        else
+            alert("You are offline");
     } 
     static back = () => {
         $(".about_window").style.display = "none";
@@ -364,7 +367,7 @@ class Stream {
             this.track = await this.stream.getVideoTracks()[0];
             this.video.setAttribute("onloadedmetadata", "Stream.getCapabilities()");
             $(".flashlight").classList.add("disable");
-            this.timeout = setTimeout(this.takeSnapshot, 5000);
+            this.timeout = setTimeout(this.takeSnapshot, 3000);
             return {res: true};
         } catch (error) {
             return {error: new Error("Can't compete action. Access to camera denied."), res: false};
