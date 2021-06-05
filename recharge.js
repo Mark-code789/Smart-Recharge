@@ -187,9 +187,10 @@ const ChangeSim = e => {
 
 const Flashlight = e => {
     if(typeof e != "object") {
+        let torch = e;
         e = {target: $(".flashlight")}
         e.target.classList.remove("flashlight_on", "flashlight_off");
-        if(e == true) {
+        if(torch == true) {
             e.target.classList.add("flashlight_off");
         } 
         else {
@@ -320,7 +321,7 @@ const Rescan = async () => {
         alert(res.error.message);
         return;
     } 
-    Flashlight(this.torch);
+    Flashlight(Stream.torch);
     $(".scan .header h3").innerHTML = "Align the digital code within the frame to scan";
     $(".hidden_footer").classList.remove("show", "hide");
     $(".hidden_footer").classList.add("hide");
