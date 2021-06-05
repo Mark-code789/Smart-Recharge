@@ -398,7 +398,7 @@ class Stream {
         ctx.drawImage(this.video,left, top, width, height, 0, 0, width, height);
         this.snapshot = this.canvas.toDataURL("image/png");
         //$(".sims").style.backgroundImage = `url(${this.snapshot})`;
-        console.log(width);
+        //console.log(width);
         await this.recognize(this.snapshot);
     } 
     static initTesseract = async () => {
