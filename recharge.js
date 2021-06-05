@@ -88,8 +88,10 @@ async function LoadingDone() {
         $(".contact_picker").classList.add("enable");
     } 
     if(deferredEvent) {
-        $(".install_prompt").style.display = "block";
-        $(".install_prompt").classList.add("show_install_prompt");
+        setTimeout(() => {
+            $(".install_prompt").style.display = "block";
+            $(".install_prompt").classList.add("show_install_prompt");
+        }, 2000);
     } 
 } 
 
