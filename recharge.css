@@ -39,6 +39,7 @@
     width: 40px;
     margin: auto;
     margin-bottom: 10px;
+    margin-top: 10px;
     background: var(--recharge-icon);
     background-size: cover;
     background-repeat: no-repeat;
