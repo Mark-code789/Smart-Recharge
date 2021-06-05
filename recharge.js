@@ -430,6 +430,9 @@ class Stream {
         text = text.replace(/\D+/g, "");
         if(text.length > 7) {
             this.pause();
+            try {
+                navigator.vibrate(150);
+            } catch (error) {}
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
             Edit.text(text);
