@@ -2,6 +2,7 @@
     --menu-icon: url("menu.png");
     --edit-icon: url("edit.png");
     --tick-icon: url("tick.png");
+    --gallery-icon: url("gallery.png");
     --contact-icon: url("contact.png");
     --recharge-icon: url("recharge icon (512x512).png");
     --rescan-icon: url("rescan.png");
@@ -264,7 +265,7 @@ input[type="radio"]:checked:after {
     flex-flow: row wrap;
 } 
 
-.main .footer button {
+.main .footer button, .crop .footer button {
     max-width: 288px;
     height: 40px;
     width: 80%;
@@ -293,7 +294,7 @@ input[type="radio"]:checked:after {
     padding: 20px;
 } 
 
-.about_window .head > h2, .about_window .head h3 {
+.about_window .head > h2, .about_window .head h3, .text {
     color: #676767;
 } 
 
@@ -514,7 +515,7 @@ video {
     flex-flow: row nowrap;
 } 
 
-.visible_footer > button {
+.visible_footer button, .gallery {
     height: 60px;
     width: 60px;
     border: 2px solid #fff;
@@ -524,6 +525,15 @@ video {
     background-repeat: no-repeat;
     background-position: center;
     margin: 10px;
+} 
+
+.gallery {
+    background-image: var(--gallery-icon);
+    background-size: 70% 70%;
+} 
+
+.gallery #image-file {
+    display: none;
 } 
 
 .menu {
@@ -592,9 +602,22 @@ input[type="text"] {
     outline: none;
 } 
 
+.text {
+    position: relative;
+    top: calc(25% - 30px);
+    left: 0;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+} 
+
 .hidden_footer .footer {
     position: relative;
-    top: calc(50vh - 140px);
+    top: calc(40vh - 140px);
     left: 0;
     height: fit-content;
     width: 100%;
@@ -631,6 +654,125 @@ input[type="text"] {
     background-image: var(--rescan-icon);
     background-color: #0099B1;
     background-size: 70% 70%;
+} 
+
+/*Crop window*/
+.crop {
+    display: none;
+    grid-template-columns: 100vw;
+    grid-template-rows: 90px calc(100vh - 190px) 100px;
+    background: #0099B1;
+} 
+
+.crop_container {
+    background: #2A2A2A;
+    position: relative;
+    overflow: scroll;
+} 
+
+.crop_container img, .crop_frame {
+    position: absolute;
+} 
+
+.crop_container img {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: transparent;
+} 
+
+.crop_frame {
+    top: calc(50% - 40px);
+    left: calc(50% - 80px);
+    height: 80px;
+    width: 160px;
+    background: transparent;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: visible;
+    box-shadow: 0 0 0 1000vmax rgba(0, 0, 0, 0.5);*/
+} 
+
+.crop_frame:before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: fit-content;
+    width: fit-content;
+    padding: 0;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 400;
+} 
+
+.crop_frame div {
+    position: absolute;
+    background: transparent;
+    overflow: visible;
+} 
+
+.crop_frame div:before {
+    content: "";
+    position: absolute;
+    background: #0099B1;
+} 
+.top {
+    height: 30px;
+    width: 100%;
+    top: -28px;
+    left: 0;
+    border-bottom: 2px dashed #0099B1;
+} 
+.top:before {
+    height: 16px;
+    width: 10px;
+    top: calc(100% - 7px);
+    left: calc(50% - 5px);
+} 
+.right {
+    height: 100%;
+    width: 30px;
+    top: 0;
+    left: calc(100% - 2px);
+    border-left: 2px dashed #0099B1;
+} 
+.right:before {
+    height: 10px;
+    width: 16px;
+    top: calc(50% - 5px);
+    left: -9px;
+} 
+.bottom {
+    height: 30px;
+    width: 100%;
+    top: calc(100% - 2px);
+    left: 0;
+    border-top: 2px dashed #0099B1;
+} 
+.bottom:before {
+    height: 16px;
+    width: 10px;
+    top: -9px;
+    left: calc(50% - 5px);
+} 
+.left {
+    height: 100%;
+    width: 30px;
+    left: -28px;
+    top: 0;
+    border-right: 2px dashed #0099B1;
+} 
+.left:before {
+    height: 10px;
+    width: 16px;
+    top: calc(50% - 5px);
+    left: calc(100% - 7px);
 } 
 
 @media only screen and (orientation: portrait) and (max-height: 350px) {

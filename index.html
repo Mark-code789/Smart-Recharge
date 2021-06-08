@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
+        <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0">
         <meta name="theme-color" content="#0099B1">
         <link rel="manifest" href="./manifest.webmanifest">
         <title>SMART RECHARGE</title>
@@ -11,6 +11,7 @@
     font-family: Arial, Serif;
     box-sizing: border-box;
     overflow: hidden;
+    outline: none;
 } 
 
 body {
@@ -192,16 +193,40 @@ body {
                 </div>
             </div>
             <div class="visible_footer">
+                <label class="gallery" for="image-file">
+                    <input type="file" id="image-file" accept="image/*">
+                </label>
                 <button class="flashlight flashlight_off"></button>
                 <button class="menu"></button>
             </div>
             <div class="hidden_footer">
                 <input type="text" placeholder="0123 4567 8912" disabled>
+                <div class="text">Confirm the top up code</div>
                 <div class="footer">
                     <button></button>
                     <button></button>
                     <button></button>
                 </div>
+            </div>
+        </article>
+        <article class="window crop" hidden>
+            <div class="header">
+                <h1>SMART RECHARGE</h1>
+                <h2>Crop the image to only expose the digital code</h2>
+                <h3>Pinch to zoom. Drag to move</h3>
+            </div>
+            <div class="crop_container">
+                <img/>
+                <div class="crop_frame">
+                    <div class="top"></div>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+                    <div class="left"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <button>NEXT</button>
+                <button>CANCEL</button>
             </div>
         </article>
         <script>
@@ -217,7 +242,9 @@ body {
                 const {outcome} = await deferredEvent.userChoice;
                 deferredEvent = null;
             } 
-            function _$(elem, property) {
+            function _$(elem, property, float) {
+                if(float) 
+                    return parseFloat(window.getComputedStyle(elem, null).getPropertyValue(property));
                 return window.getComputedStyle(elem, null).getPropertyValue(property);
             } 
             function _$$(child, parent) {
@@ -284,7 +311,7 @@ body {
                     tesseractLoaded = true;
                 else
                     rechargeLoaded = true;
-                    
+                
                 if(tesseractLoaded && rechargeLoaded) 
                     Stream.initTesseract();
             } 

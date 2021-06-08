@@ -2,6 +2,7 @@ const srcs = [
     "menu.png",
     "edit.png",
     "tick.png",
+    "gallery.png", 
     "contact.png",
     "recharge icon (512x512).png", 
     "rescan.png",
@@ -16,6 +17,7 @@ const imageProps = [
     "--menu-icon", 
     "--edit-icon", 
     "--tick-icon", 
+    "--gallery-icon", 
     "--contact-icon",
     "--recharge-icon", 
     "--rescan-icon", 
@@ -54,6 +56,7 @@ async function load (i = 0) {
 }
 
 async function LoadingDone() {
+    ImageProps.init();
     $(".spinner").style.animationPlayState = "paused";
     $(".load").style.display = "none";
     $(".main").style.display = "grid";
@@ -67,6 +70,7 @@ async function LoadingDone() {
     $$(".other_number .footer button")[1].addEventListener("click", () => Scan(true, true), false);
     $$(".visible_footer button")[0].addEventListener("click", Flashlight, false);
     $$(".visible_footer button")[1].addEventListener("click", Home, false);
+    $("#image-file").addEventListener("input", Import.image, false);
     $$(".hidden_footer .footer button")[0].addEventListener("click", () => Edit.makeEditable(true), false);
     $$(".hidden_footer .footer button")[1].addEventListener("click", Call, false);
     $$(".hidden_footer .footer button")[2].addEventListener("click", Rescan, false);
@@ -75,7 +79,13 @@ async function LoadingDone() {
     $$(".options button")[2].addEventListener("click", Options.contact, false);
     $$(".options button")[3].addEventListener("click", Options.contact, false);
     $(".about_window .footer button").addEventListener("click", Options.back, false);
+    $$(".crop .footer button")[0].addEventListener("click", ImageProps.takeSnap, false);
+    $$(".crop .footer button")[1].addEventListener("click", Import.exit, false);
     
+    for(let elem of $$(".crop_container img, .crop_frame, .crop_frame div")) {
+        elem.addEventListener("touchstart", Drag.start, false);
+        elem.addEventListener("touchmove", Drag.move, false);
+    } 
     
     for(let sim of $$("input[type=radio]")) {
         sim.addEventListener("change", ChangeSim, false);
@@ -108,8 +118,8 @@ class Options {
         if(navigator.canShare) {
             navigator.share({
                 title: "Smart Recharge", 
-                text: "Hey, i use Smart Recharge to recharge my phone. Try it put\n\n", 
-                url: "https://mark-code789.github.io/Smart Recharge/index.html"
+                text: "Hey, i use Smart Recharge to recharge my phone. Try it out\n\n", 
+                url: "https://mark-code789.github.io/Smart-Recharge/index.html"
             }).catch( (error) => { 
             	let message = error.toString().split(":");
                 if(message[0] != "AbortError") 
@@ -182,6 +192,24 @@ const ChangeSim = e => {
         SIM.group = 4;
         $$(".main .footer button")[1].classList.add("disable");
         break;
+    } 
+} 
+
+class Import {
+    static image = e => {
+        let path = e.target.files[0];
+        if(path) {
+            $("img").src = URL.createObjectURL(path);
+            $(".scan").style.display = "none";
+            $(".crop").style.display = "grid";
+            e.target.value = '';
+            Stream.pause();
+        } 
+    } 
+    static exit = e => {
+        $(".scan").style.display = "grid";
+        $(".crop").style.display = "none";
+        Stream.start();
     } 
 } 
 
@@ -371,6 +399,7 @@ class Stream {
             this.timeout = setTimeout(this.takeSnapshot, 3000);
             return {res: true};
         } catch (error) {
+            console.log(error);
             return {error: new Error("Can't compete action. Access to camera denied."), res: false};
         } 
     } 
@@ -401,25 +430,22 @@ class Stream {
         this.canvas.width = width;
         this.canvas.height = height;
         let ctx = this.canvas.getContext("2d");
-        //ctx.filter = 'contrast(0.5) brightness(0.5)';
-        ctx.drawImage(this.video,left, top, width, height, 0, 0, width, height);
+        ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
         this.snapshot = this.canvas.toDataURL("image/png");
-        //$(".sims").style.backgroundImage = `url(${this.snapshot})`;
-        //console.log(width);
         await this.recognize(this.snapshot);
     } 
     static initTesseract = async () => {
         try {
             this.worker = Tesseract.createWorker();
             await this.worker.load();
+            await LoadingDone();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');
-            LoadingDone();
         } catch (error) {
             console.log(error);
         } 
     } 
-    static recognize = async (img) => {
+    static recognize = async (img, importWindow, retake) => {
         let res = await this.worker.recognize(img);
         let texts = res.data.text.split("\n");
         let text = "";
@@ -434,6 +460,24 @@ class Stream {
             try {
                 navigator.vibrate(150);
             } catch (error) {}
+            
+            if(importWindow) {
+                $(".crop").style.display = "none";
+                $(".scan").style.display = "grid";
+                $(".crop .footer button").classList.remove("disable", "enable");
+                $(".crop .footer button").classList.add("enable");
+                $(".crop h3").innerHTML = "Pinch to zoom. Drag to move";
+                img = $("img");
+                img.style.height = "100%";
+                img.style.width = "100%";
+                img.style.top = "0";
+                img.style.left = "0";
+                let frame = $(".crop_frame");
+                frame.style.height = "80px";
+                frame.style.width = "160px";
+                frame.style.top = "calc(50% - 40px)";
+                frame.style.left = "calc(50% - 80px)";
+            } 
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
             Edit.text(text);
@@ -441,7 +485,17 @@ class Stream {
             $(".hidden_footer").classList.add("show");
         } 
         else {
-            this.takeSnapshot();
+            if(importWindow) {
+                if(retake) {
+                    alert("Please ensure you crop the image to only expose the digital code.");
+                    $(".crop .footer button").classList.remove("disable", "enable");
+                    $(".crop .footer button").classList.add("enable");
+                } else {
+                    this.recognize(img, importWindow, true);
+                } 
+            } 
+            else
+                this.takeSnapshot();
         } 
     } 
     static flashlight = async (on) => {
@@ -454,5 +508,142 @@ class Stream {
             await this.pause();
             await this.start();
         } 
+    } 
+}
+
+class Drag {
+    static init = {X: 0, Y: 0};
+    
+    static start = e => {
+        if(e.touches.length == 2) {
+            this.init = e.touches;
+        } 
+        else if(e.touches.length == 1) {
+            this.init.X = e.touches[0].clientX;
+            this.init.Y = e.touches[0].clientY;
+        } 
+    } 
+    
+    static move = e => {
+        e.preventDefault();
+        let parent = _$$($(".crop_container"));
+        if(e.touches.length == 1) {
+            let changeX = e.touches[0].clientX - this.init.X;
+            let changeY = e.touches[0].clientY - this.init.Y;
+            if(e.target.className == "crop_frame" || e.target == $("img")) {
+                
+                let top = _$(e.target, "top", true) + changeY;
+                let left = _$(e.target, "left", true) + changeX;
+                
+                if(e.target.className == "crop_frame" && top >= 0 && top + _$(e.target, "height", true) <= parent.height && left >= 0 && left + _$(e.target, "width", true) <= parent.width) {
+                    e.target.style.left = `${left}px`;
+                    e.target.style.top = `${top}px`;
+                }
+                else if(e.target == $("img")) {
+                    e.target.style.left = `${left}px`;
+                    e.target.style.top = `${top}px`;
+                } 
+            } 
+            else if(e.target.className == "top" || e.target.className == "bottom") {
+                let frame = $(".crop_frame");
+                let oldHeight = _$(frame, "height", true);
+                let height = 0;
+                if(e.target.className == "top") 
+                   height = oldHeight - changeY;
+               else
+                   height = oldHeight + changeY;
+               
+               if(height > 40 && e.touches[0].clientY >= parent.top && e.touches[0].clientY <= parent.bottom) {
+                   if(e.target.className == "top") {
+                       frame.style.top = `${_$(frame, "top", true) + changeY}px`;
+                   } 
+                   frame.style.height = `${height}px`;
+               } 
+            } 
+            else if(e.target.classList.contains("left") || e.target.classList.contains("right")) {
+                let frame = $(".crop_frame");
+                let oldWidth = _$(frame, "width", true);
+                let width = 0;
+                if(e.target.className == "left") 
+                    width = oldWidth - changeX;
+                else
+                    width = oldWidth + changeX;
+                if(width > 100 && e.touches[0].clientX >= parent.left && e.touches[0].clientX <= parent.right) {
+                    if(e.target.className == "left") 
+                    frame.style.left = `${_$(frame, "left", true) + changeX}px`;
+                    frame.style.width = `${width}px`;
+                } 
+            } 
+            this.init.X = e.touches[0].clientX;
+            this.init.Y = e.touches[0].clientY;
+        } 
+        else if(e.touches.length == 2) {
+            let img = e.target != $("img")? $("img"): e.target;
+            let changeX1 = Math.abs(e.touches[0].clientX - this.init[0].clientX);
+            let changeX2 = Math.abs(e.touches[1].clientX - this.init[1].clientX);
+            let changeY1 = Math.abs(e.touches[0].clientY - this.init[0].clientY);
+            let changeY2 = Math.abs(e.touches[1].clientY - this.init[1].clientY);
+            let change = Math.max(changeX1, changeX2, changeY1, changeY2);
+            let d1 = Math.hypot(this.init[0].clientX - this.init[1].clientX, this.init[0].clientY - this.init[1].clientY);
+            let d2 = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            change = d1 > d2? change*-1: change;
+            let height = _$(img, "height", true) + change;
+            let width = _$(img, "width", true) + change;
+            if(width > 200 && width < (Math.min(window.innerHeight, window.innerWidth)*2)) {
+                img.style.top = `${_$(img, "top", true) + (change * -0.5)}px`;
+                img.style.left = `${_$(img, "left", true) + (change * -0.5)}px`;
+                img.style.height = `${height}px`;
+                img.style.width = `${width}px`;
+                this.init = e.touches;
+            } 
+        } 
+    } 
+}
+
+class ImageProps {
+    static cvs;
+    static img;
+    static frame;
+    static init = () => {
+        this.cvs = $$$("canvas");
+        this.frame = $(".crop_frame");
+        this.img = $("img");
+    } 
+    static getProps = () => {
+        let aspectRatio = this.img.naturalWidth / this.img.naturalHeight;
+        let w1, h1;
+        
+        if(window.innerWidth < window.innerHeight) {
+            w1 = _$(this.img, "width", true);
+            h1 = w1 * Math.pow(aspectRatio, -1);
+        } 
+        else {
+            h1 = _$(this.img, "height", true)
+            w1 = h1 * aspectRatio;
+        } 
+        let x1 = _$(this.img, "left", true) + ((_$(this.img, "width", true)/2) - (w1/2));
+        let y1 = _$(this.img, "top", true) + ((_$(this.img, "height", true)/2) - (h1/2));
+        let h2 = _$(this.frame, "height", true);
+        let w2 = _$(this.frame, "width", true);
+        let x2 = _$(this.frame, "left", true);
+        let y2 = _$(this.frame, "top", true);
+        let x = this.img.naturalWidth * (x2-x1) / w1;
+        let y = this.img.naturalHeight * (y2-y1) / h1;
+        let h = h2 * this.img.naturalHeight / h1;
+        let w = w2 * this.img.naturalWidth / w1;
+        return {x1, y1, w1, h1, x2, y2, w2, h2, x, y, w, h};
+    } 
+    static takeSnap = e => {
+        let props = this.getProps();
+        this.cvs.height = props.h2;
+        this.cvs.width = props.w2;
+        let ctx = this.cvs.getContext('2d');
+        ctx.drawImage(this.img, props.x, props.y, props.w, props.h, 0, 0, props.w2, props.h2);
+        
+        let snap = this.cvs.toDataURL("image/png");
+        $(".crop h3").innerHTML = "scanning";
+        e.target.classList.remove("enable", "disable");
+        e.target.classList.add("disable");
+        Stream.recognize(snap, $(".crop"));
     } 
 } 
