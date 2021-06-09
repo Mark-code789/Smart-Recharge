@@ -41,8 +41,8 @@ async function load (i = 0) {
             
             if(i < srcs.length-2)
                 load(i+1);
-            /*else
-                LoadingDone();*/
+            else
+                LoadingDone();
         } 
         else {
             console.log(response);
@@ -192,6 +192,11 @@ const ChangeSim = e => {
         SIM.group = 4;
         $$(".main .footer button")[1].classList.add("disable");
         break;
+        
+        default:
+        SIM.code = "";
+        SIM.group = 4;
+        $$(".main .footer button")[1].classList.add("disable");
     } 
 } 
 
@@ -334,7 +339,7 @@ const Call = () => {
     let value = $("input[type=text]").value;
     let hash = encodeURIComponent("#");
     if(SIM.anotherNo == null)
-        window.location.href = "tel:" + SIM.code + value.replace(" ", "") + hash;
+        window.location.href = "tel:" + SIM.code + value.replace(" ", "") + ((SIM.carrier == "Other")? "": hash);
     else
         window.location.href = "tel:" + SIM.code + value.replace(" ", "") + "*" + SIM.anotherNo + hash;
     Edit.initialText = "";
@@ -494,8 +499,12 @@ class Stream {
                     this.recognize(img, importWindow, true);
                 } 
             } 
-            else
-                this.takeSnapshot();
+            else {
+                if(retake) 
+                    this.takeSnapshot();
+                else
+                    this.recognize(img, importWindow, true);
+            } 
         } 
     } 
     static flashlight = async (on) => {
