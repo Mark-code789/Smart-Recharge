@@ -486,7 +486,7 @@ class Stream {
             } 
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
-            Edit.text(text);
+            await Edit.text(text);
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
         } 
