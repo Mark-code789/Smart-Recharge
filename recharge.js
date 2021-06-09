@@ -41,8 +41,8 @@ async function load (i = 0) {
             
             if(i < srcs.length-2)
                 load(i+1);
-            else
-                LoadingDone();
+            /*else
+                LoadingDone();*/
         } 
         else {
             console.log(response);
