@@ -173,6 +173,7 @@ const PickContact = async () => {
 const ChangeSim = e => {
     let elem = e.target;
     $(".main .header h2").innerHTML = elem.value;
+    $$(".main .footer button")[1].classList.remove("enable", "disable");
     SIM.carrier = elem.value;
     switch(elem.value) {
         case "Safaricom":
