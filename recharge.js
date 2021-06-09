@@ -501,10 +501,7 @@ class Stream {
                 } 
             } 
             else {
-                if(retake) 
-                    this.takeSnapshot();
-                else
-                    this.recognize(img, importWindow, true);
+                this.takeSnapshot();
             } 
         } 
     } 
