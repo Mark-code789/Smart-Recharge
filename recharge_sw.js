@@ -3,6 +3,7 @@ let appShellFiles = [
     "menu.png",
     "edit.png",
     "tick.png",
+    "gallery.png",
     "contact.png",
     "recharge icon (512x512).png", 
     "rescan.png",
