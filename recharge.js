@@ -281,6 +281,7 @@ const Scan = async (anotherNo, cancel) => {
         alert(res.error.message);
         return;
     } 
+    Flashlight(Stream.torch);
     $(".scan .header h3").innerHTML = "Align the digital code within the frame to scan";
     $(".recharged").style.display = "none";
     $(".main").style.display = "none";

@@ -761,7 +761,7 @@ input[type="text"]:disabled {
     height: fit-content;
     width: fit-content;
     padding: 0;
-    color: #fff;
+    color: #0099B1;
     font-size: 2rem;
     font-weight: 400;
 } 
@@ -868,7 +868,7 @@ input[type="text"]:disabled {
 .recharged .footer {
     position: relative;
     width: 100%;
-    top: 10vh;
+    top: 20vh;
 } 
 
 @media only screen and (orientation: portrait) and (max-height: 350px) {
