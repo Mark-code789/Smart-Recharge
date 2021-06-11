@@ -81,6 +81,8 @@ async function LoadingDone() {
     $(".about_window .footer button").addEventListener("click", Options.back, false);
     $$(".crop .footer button")[0].addEventListener("click", ImageProps.takeSnap, false);
     $$(".crop .footer button")[1].addEventListener("click", Import.exit, false);
+    $$(".recharged .footer button")[0].addEventListener("click", () => Scan(false), false);
+    $$(".recharged .footer button")[1].addEventListener("click", Home, false);
     
     for(let elem of $$(".crop_container img, .crop_frame, .crop_frame div")) {
         elem.addEventListener("touchstart", Drag.start, false);
@@ -247,6 +249,7 @@ const Flashlight = e => {
 const Home = () => {
     $(".main").style.display = "grid";
     $(".scan").style.display = "none";
+    $(".recharged").style.display = "none";
     if(Stream.started)
         Stream.pause();
 } 
@@ -279,12 +282,12 @@ const Scan = async (anotherNo, cancel) => {
         return;
     } 
     $(".scan .header h3").innerHTML = "Align the digital code within the frame to scan";
+    $(".recharged").style.display = "none";
     $(".main").style.display = "none";
     $(".scan").style.display = "grid";
 }
 
 class Edit {
-    static initialText = "";
     static makeEditable = (editable) => {
         if(editable == true) {
             $("input[type=text]").disabled = false;
@@ -295,33 +298,22 @@ class Edit {
             $("input[type=text]").disabled = true;
         } 
     } 
-    static text = (e) => {
-        let text = typeof e == "string"? e: e.target.value;
-        text = text.trim();
-        if(this.initialText.length <= text.length) {
-            this.initialText = text.trim();
-            text = text.replace(/\s+/g, "");
-            let value = "";
-            
-            for(let i = 0; i < text.length; i++) {
-                value += text.charAt(i);
-                if((i+1) % SIM.group == 0) {
-                    value += " ";
-                } 
-            } 
-            value = value.trim();
-            $("input[type=text]").value = value;
-            return;
+    static text = e => {
+        let text = e == undefined? $("input[type=text]").value: e.target.value.replace(/\s+/g, '');
+        let value = "";
+        for(let i = 0, j = SIM.group; i < text.length; i += SIM.group, j += SIM.group) {
+            let slice = text.slice(i, j);
+            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
         } 
-        this.initialText = text.trim();
-        $("input[type=text]").value = text;
+        $("input[type=text]").style.width = `calc(${value.length}ch + 2px)`;
+        $("input[type=text]").value = value;
     } 
     static tel = e => {
         let contact = typeof e == "string"? e: e.target.value;
         contact = contact.replace(/\s+/g, "");
         let length = contact.replace("+254", "0").length;
         e = typeof e == "string"? {target: $("input[type=tel]")}: e;
-        console.log(e);
+        
         contact = contact.includes("+254") && contact.length > 4? contact.slice(0,4) + " " + contact.slice(4,7) + (contact.replace(" ", "").length > 7? " " + contact.replace(" ", "").slice(7,): ""): 
                   !contact.includes("+254") && contact.length > 4? contact.slice(0,4) + " " + contact.slice(4,): contact;
         e.target.value = contact.includes("+254")? contact.slice(0,15): contact.slice(0,11);
@@ -343,10 +335,11 @@ const Call = () => {
         window.location.href = "tel:" + SIM.code + value.replace(" ", "") + ((SIM.carrier == "Other")? "": hash);
     else
         window.location.href = "tel:" + SIM.code + value.replace(" ", "") + "*" + SIM.anotherNo + hash;
-    Edit.initialText = "";
+    
     $("input[type=text]").value = "";
     $(".hidden_footer").classList.remove("show", "hide");
     $(".hidden_footer").classList.add("hide");
+    $(".recharged").style.display = "block";
 }
 
 const Rescan = async () => {
@@ -444,9 +437,9 @@ class Stream {
         try {
             this.worker = Tesseract.createWorker();
             await this.worker.load();
-            await LoadingDone();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');
+            await LoadingDone();
         } catch (error) {
             console.log(error);
         } 
@@ -486,7 +479,7 @@ class Stream {
             } 
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
-            await Edit.text(text);
+            await Edit.text();
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
         } 

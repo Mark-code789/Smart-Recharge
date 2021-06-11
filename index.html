@@ -14,6 +14,14 @@
     outline: none;
 } 
 
+html {
+    font-size: 0.9em;
+} 
+
+button {
+    font-size: 0.8rem;
+} 
+
 body {
     margin: 0;
     padding: 0;
@@ -204,7 +212,11 @@ body {
                 <button class="menu"></button>
             </div>
             <div class="hidden_footer">
-                <input type="text" placeholder="0123 4567 8912" disabled>
+                <div class="input">
+                    <label class='border'></label>
+                    <input type="text" value="1234 5678 9012" disabled>
+                    <label class='border'></label>
+                </div>
                 <div class="text">Confirm the top up code</div>
                 <div class="footer">
                     <button></button>
@@ -231,6 +243,21 @@ body {
             <div class="footer">
                 <button>NEXT</button>
                 <button>CANCEL</button>
+            </div>
+        </article>
+        <article class="window recharged" hidden>
+            <div class="head">
+                <div class="icon"></div>
+                <h2>Smart Recharge</h2>
+            </div>
+            <div>
+                <div class="success_icon"></div>
+                <p>Thank you for using Smart Recharge</p>
+                <p>Please check service provider notification or SMS for recharge results</p>
+            </div>
+            <div class="footer">
+                <button>CONTINUE RECHARGING</button>
+                <button>BACK TO MENU</button>
             </div>
         </article>
         <script>
