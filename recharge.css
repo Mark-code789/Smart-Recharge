@@ -164,7 +164,7 @@ h1, h2, h3, h4 {
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
-    overflow: hidden;
+    overflow: auto;
     background: #fff;
     background-size: auto;
     background-position: center;
@@ -896,6 +896,9 @@ input[type="text"]:disabled {
     .main {
         grid-template-rows: 60px calc(100vh - 110px) 50px;
     }
+    .sim {
+        margin: 5px 10px;
+    } 
     .other_number {
         grid-template-rows: 100vh;
     } 
