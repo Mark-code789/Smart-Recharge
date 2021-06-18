@@ -24,4 +24,7 @@ This output is validate and if it fails the above process is repeated.
 - Difficult to read user SIMs and making the call directly without requiring user permission.
 - Due to difficulty of reading user SIM information, the app primarily supports Kenyan mobile carrier USSD codes. 
 ## Contributing
-Thank you for supporting this project. Contributions and suggestions are welcomed to make this it effective and efficient. 
+Thank you for supporting this project. Contributions and suggestions are welcomed to make this it effective and efficient.  
+I will highly appreciate contributions for: 
+- Getting cross-browser SIM information.
+- Making a call directly to the Mobile Carrie without using javascript `tel`.
