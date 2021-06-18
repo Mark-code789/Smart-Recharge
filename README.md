@@ -12,7 +12,7 @@ After opening the link you will be prompted to install the app. For Chrome brows
 ## How it works
 Smart Recharge uses `mediaDevices` API to access the user camera and then display the stream using the `video` element. 
 A snapshot of the video is taken by drawing the video on `canvas` cropping it using the scanning frame dimensions.  
-The snapshot is then fed to [Tesseract](https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js) library for scanning, which returns a string representing the output of the action. 
+The snapshot is then fed to [Tesseract](https://github.com/naptha/tesseract.js?files=1) library for scanning, which returns a string representing the output of the action. 
 This output is validate and if it fails the above process is repeated.
 ## Pros
 - Works better than native apps. 
