@@ -23,5 +23,5 @@ This output is validate and if it fails the above process is repeated.
 - Requires latest browsers. if not update is needed.
 - Difficult to read user SIMs and making the call directly without requiring user permission.
 - Due to difficulty of reading user SIM information, the app primarily supports Kenyan mobile carrier USSD codes. 
-
+## Contributing
 Thank you for supporting this project. Contributions and suggestions are welcomed to make this it effective and efficient. 
