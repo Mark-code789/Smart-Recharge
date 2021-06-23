@@ -175,8 +175,6 @@ h1, h2, h3, h4 {
     position: relative;
     margin: 5px 25px;
     padding: 0;
-    max-height: 300px;
-    max-width: 225px;
     height: var(--sim-height);
     width: calc(var(--sim-height) * 0.75);
     border-radius: calc(var(--sim-height) * 0.06667);
@@ -468,8 +466,8 @@ video {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 40px;
-    width: 200px;
+    height: 60px;
+    width: 250px;
     box-shadow: 0 0 0 1000vmax rgba(0,0,0,0.7);
     background: transparent;
     overflow: visible;
@@ -526,7 +524,7 @@ video {
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(200px, 0, 0);
+        transform: translate3d(250px, 0, 0);
     }
 } 
 
@@ -879,7 +877,16 @@ input[type="text"]:disabled {
     } 
 }
 
+@media only screen and (orientation: landscape) and (min-height: 720px) {
+    :root {
+        --sim-height: 300px;
+    } 
+} 
+
 @media only screen and (orientation: landscape) and (max-height: 350px) {
+    :root {
+        --sim-height: calc(calc(100vh - 110px) * 0.8);
+    } 
     .hidden_footer {
         height: 100vh;
     } 
@@ -889,9 +896,6 @@ input[type="text"]:disabled {
 } 
 
 @media only screen and (orientation: landscape) {
-    :root {
-        --sim-height: calc(calc(100vh - 110px) * 0.8);
-    } 
     .about {
         width: 60px;
     } 
