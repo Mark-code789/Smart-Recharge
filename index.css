@@ -631,7 +631,7 @@ video {
     padding: 20px 2.5px 0 2.5px;
     margin: 0;
     white-space: nowrap;
-    background: #888;
+    opacity: 0;
     z-index: -9999;
 } 
 
