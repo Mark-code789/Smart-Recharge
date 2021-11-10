@@ -650,11 +650,11 @@ input[type="text"]:disabled {
 } 
 
 .border:first-of-type {
-    left: -1.5px;
+    left: -0.5px;
 } 
 
 .border:last-of-type {
-    right: -1.5px;
+    right: -0.5px;
 } 
 
 .text {
