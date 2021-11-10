@@ -630,7 +630,7 @@ input[type="text"] {
     font-size: 1.7rem;
     font-weight: 400;
     text-align: center;
-    padding: 20px 1px 0 1px;
+    padding: 20px 2.5px 0 2.5px;
     margin: 0;
     outline: none;
     background: #fff;
@@ -650,11 +650,11 @@ input[type="text"]:disabled {
 } 
 
 .border:first-of-type {
-    left: -0.5px;
+    left: -1.5px;
 } 
 
 .border:last-of-type {
-    right: -0.5px;
+    right: -1.5px;
 } 
 
 .text {
