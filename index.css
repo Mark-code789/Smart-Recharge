@@ -632,6 +632,7 @@ video {
     margin: 0;
     white-space: nowrap;
     background: #888;
+    z-index: -9999;
 } 
 
 input[type="text"] {
