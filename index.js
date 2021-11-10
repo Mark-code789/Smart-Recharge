@@ -288,7 +288,6 @@ const Scan = async (anotherNo, cancel) => {
     $(".main").style.display = "none";
     $(".scan").style.display = "grid";
     $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
-    alert($(".width_generator").getBoundingClientRect().width);
 }
 
 class Edit {
