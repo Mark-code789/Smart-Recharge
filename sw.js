@@ -1,4 +1,4 @@
-let cacheName = "recharger.V.1";
+let cacheName = "recharge";
 let appShellFiles = [
     "menu.png",
     "edit.png",
@@ -12,8 +12,9 @@ let appShellFiles = [
     "safaricom.png",
     "airtel.png",
     "telkom.png", 
-    "recharge.js",
     "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js", 
+    "index.js",
+    "index.css",
     "index.html"
 ];
 
@@ -27,27 +28,17 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("fetch", (e) => {
     e.respondWith(
-        caches.match(e.request).then((res1) => {
-            if(res1) {
-                if(navigator.onLine && (e.request.url.includes(".js") || e.request.url.includes(".css") || e.request.url.includes(".html"))) {
-                    return fetch(e.request).then((res2) => {
-                   	    return caches.open(cacheName).then((cache) => {
-                            cache.put(e.request, res2.clone());
-                            return res2;
-                        })
-                    }).catch((error) => {
-                        return res1;
-                    })
-                } 
-                return res1;
-            }
-            else {
+        caches.match(e.request, {ignoreSearch: true}).then((res1) => {
+            if(navigator.onLine && /(?<!min).(html|css|js)(.*?)$/g.test(e.request.url) || !res1) {
                 return fetch(e.request).then((res2) => {
-                    return caches.open(cacheName).then((cache) => {
+               	    return caches.open(cacheName).then((cache) => {
                         cache.put(e.request, res2.clone());
                         return res2;
                     })
                 })
+            } 
+            else {
+                return res1;
              }
         })
     )
