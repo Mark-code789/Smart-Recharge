@@ -84,6 +84,8 @@ async function LoadingDone() {
     $$(".recharged .footer button")[0].addEventListener("click", () => Scan(false), false);
     $$(".recharged .footer button")[1].addEventListener("click", Home, false);
     
+    $("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
+    
     for(let elem of $$(".crop_container img, .crop_frame, .crop_frame div")) {
         elem.addEventListener("touchstart", Drag.start, false);
         elem.addEventListener("touchmove", Drag.move, false);
@@ -306,7 +308,8 @@ class Edit {
             let slice = text.slice(i, j);
             value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
         } 
-        $("input[type=text]").style.width = `${value.length + 1 * 8 + 5}px)`;
+        $(".width_generator").innerHTML = value;
+        $("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
         $("input[type=text]").value = value;
     } 
     static tel = e => {
@@ -480,7 +483,8 @@ class Stream {
             } 
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
-            $("input[type=text]").style.width = `${text.length + 1 * 8 + 5}px)`;
+            $(".width_generator").innerHTML = value;
+        	$("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
             await Edit.text();
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
