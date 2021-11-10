@@ -350,7 +350,7 @@ body {
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
                 	window.onload = _ => {
-                		navigator.serviceWorker.register("recharge_sw.js").then(res => {
+                		navigator.serviceWorker.register("sw.js").then(res => {
                 			pageComplete();
                	 	}).catch(error => {
                		 	pageComplete();
