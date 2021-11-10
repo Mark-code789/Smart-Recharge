@@ -622,6 +622,8 @@ video {
 
 .width_generator {
 	position: absolute;
+	width: fit-content;
+	height: fit-content;
 	border: 1px solid #0099B1;
     border-top: none;
     font-size: 1.7rem;
