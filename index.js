@@ -306,7 +306,7 @@ class Edit {
             let slice = text.slice(i, j);
             value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
         } 
-        $("input[type=text]").style.width = `calc(${value.length}ch + 2px)`;
+        $("input[type=text]").style.width = `${value.length + 1 * 8 + 5}px)`;
         $("input[type=text]").value = value;
     } 
     static tel = e => {
@@ -480,6 +480,7 @@ class Stream {
             } 
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
+            $("input[type=text]").style.width = `${text.length + 1 * 8 + 5}px)`;
             await Edit.text();
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
