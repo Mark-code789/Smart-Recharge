@@ -287,6 +287,7 @@ const Scan = async (anotherNo, cancel) => {
     $(".recharged").style.display = "none";
     $(".main").style.display = "none";
     $(".scan").style.display = "grid";
+    $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
     alert($(".width_generator").getBoundingClientRect().width);
 }
 
@@ -309,7 +310,7 @@ class Edit {
             value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
         } 
         $(".width_generator").innerHTML = value;
-        $("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
+        $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
         $("input[type=text]").value = value;
     } 
     static tel = e => {
@@ -484,7 +485,7 @@ class Stream {
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
             $(".width_generator").innerHTML = text;
-        	$("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
+        	$("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
             await Edit.text();
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
