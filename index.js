@@ -85,6 +85,7 @@ async function LoadingDone() {
     $$(".recharged .footer button")[1].addEventListener("click", Home, false);
     
     $("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
+    alert(getComputedStyle($("input[type=text]"), null).width);
     
     for(let elem of $$(".crop_container img, .crop_frame, .crop_frame div")) {
         elem.addEventListener("touchstart", Drag.start, false);
