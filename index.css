@@ -581,7 +581,7 @@ video {
 .hidden_footer {
     display: block;
     position: absolute;
-    top: 100vh;
+    top: 50vh;
     left: 0;
     height: 50vh;
     width: 100vw;
@@ -618,6 +618,17 @@ video {
     width: fit-content;
     height: fit-content;
     overflow: visible;
+} 
+
+.width_generator {
+	position: absolute;
+	border: 1px solid #0099B1;
+    border-top: none;
+    font-size: 1.7rem;
+    font-weight: 400;
+    text-align: center;
+    padding: 20px 2.5px 0 2.5px;
+    margin: 0;
 } 
 
 input[type="text"] {
