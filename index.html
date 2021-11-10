@@ -320,13 +320,13 @@ body {
                 let JsLink1 = $$$("script");
                 
                 SheetLink.type = "text/css";
-                SheetLink.rel = "stylesheet?v=1.1";
+                SheetLink.rel = "stylesheet";
                 SheetLink.href = "index.css?v=1.1";
                 
                 JsLink0.onload = () => {
                     scriptLoaded("recharge");
                 };
-                JsLink0.src = "recharge.js";
+                JsLink0.src = "index.js?v=1.1";
                 JsLink1.onload = () => {
                     scriptLoaded("tesseract");
                 };
