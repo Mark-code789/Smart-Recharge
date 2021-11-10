@@ -631,6 +631,7 @@ video {
     text-align: center;
     padding: 20px 2.5px 0 2.5px;
     margin: 0;
+    background: #888;
 } 
 
 input[type="text"] {
