@@ -622,7 +622,7 @@ video {
 
 input[type="text"] {
     display: inline-block;
-    width: calc(14ch + 2px);
+    width: max-content;
     overflow: auto;
     border: 1px solid #0099B1;
     border-top: none;
