@@ -84,7 +84,7 @@ async function LoadingDone() {
     $$(".recharged .footer button")[0].addEventListener("click", () => Scan(false), false);
     $$(".recharged .footer button")[1].addEventListener("click", Home, false);
     
-    $("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
+    $("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
     
     for(let elem of $$(".crop_container img, .crop_frame, .crop_frame div")) {
         elem.addEventListener("touchstart", Drag.start, false);
@@ -309,7 +309,7 @@ class Edit {
             value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
         } 
         $(".width_generator").innerHTML = value;
-        $("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
+        $("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
         $("input[type=text]").value = value;
     } 
     static tel = e => {
@@ -484,7 +484,7 @@ class Stream {
             $(".scan .header h3").innerHTML = "Please confirm the top up code.";
             $("input[type=text]").value = text;
             $(".width_generator").innerHTML = text;
-        	$("input[type=text]").style.width = `${getComputedStyle($(".width_generator")).width}px)`;
+        	$("input[type=text]").style.width = `${getComputedStyle($(".width_generator"), null).getPropertyValue("width")}px`;
             await Edit.text();
             $(".hidden_footer").classList.remove("show", "hide");
             $(".hidden_footer").classList.add("show");
