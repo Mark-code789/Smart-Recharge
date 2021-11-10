@@ -628,9 +628,9 @@ video {
     border-top: none;
     font-size: 1.7rem;
     font-weight: 400;
-    text-align: center;
     padding: 20px 2.5px 0 2.5px;
     margin: 0;
+    white-space: nowrap;
     background: #888;
 } 
 
