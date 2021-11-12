@@ -109,6 +109,8 @@ async function LoadingDone() {
             $(".install_prompt").classList.add("show_install_prompt");
         }, 1000);
     } 
+    
+    history.pushState(null, "", "");
 } 
 
 const About = () => {
@@ -652,4 +654,42 @@ class ImageProps {
         e.target.classList.add("disable");
         Stream.recognize(snap, $(".crop"));
     } 
+} 
+
+const Notify = (msg) => {
+	let popUpNote = $("#pop-up-note");
+    popUpNote.innerHTML = msg;
+    popUpNote.style.display = "block";
+    popUpNote.classList.remove("pop");
+    void popUpNote.offsetWidth;
+    popUpNote.classList.add("pop");
+} 
+
+window.onpopstate = function (state) {
+	if(_$($(".main"), 'display') == 'grid') {
+		Notify("Press again to exit.");
+		setTimeout(() => {
+			history.pushState(null, "", "");
+		}, 4000);
+		return;
+	} 
+	else if(_$($(".about_window"), 'display') == 'block') {
+		Options.back();
+	} 
+	else if(_$($(".other_number"), 'display') == 'grid') {
+		Scan(true, true);
+	} 
+	else if(_$($(".scan"), 'display') == 'grid') {
+		Home();
+	} 
+	else if(_$($(".recharged"), 'display') == 'block') {
+		Home();
+	} 
+	else if(_$($(".crop"), 'display') == 'grid') {
+		Import.exit();
+	} 
+	else if($(".hidden_footer").classList.contains("show")) {
+		Rescan();
+	} 
+	history.pushState(null, "", "");
 } 
