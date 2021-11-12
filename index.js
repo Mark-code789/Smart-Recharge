@@ -281,7 +281,7 @@ const Scan = async (anotherNo, cancel) => {
     } 
     let res = await Stream.start();
     if(!res.res) {
-        alert(res.error.message);
+        Notify(res.error.message);
         return;
     } 
     Flashlight(Stream.torch);
