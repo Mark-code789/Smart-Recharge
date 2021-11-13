@@ -1,4 +1,4 @@
-let cacheName = "rechargeV2.5";
+let cacheName = "rechargeV2.6";
 let appShellFiles = [
     "menu.png",
     "edit.png",
