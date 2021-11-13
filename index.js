@@ -673,6 +673,9 @@ window.onpopstate = function (state) {
 		}, 4000);
 		return;
 	} 
+	else if($(".hidden_footer").classList.contains("show")) {
+		Rescan();
+	} 
 	else if(_$($(".about_window"), 'display') == 'block') {
 		Options.back();
 	} 
@@ -687,9 +690,6 @@ window.onpopstate = function (state) {
 	} 
 	else if(_$($(".crop"), 'display') == 'grid') {
 		Import.exit();
-	} 
-	else if($(".hidden_footer").classList.contains("show")) {
-		Rescan();
 	} 
 	history.pushState(null, "", "");
 } 
