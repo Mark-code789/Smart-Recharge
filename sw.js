@@ -1,4 +1,4 @@
-let cacheName = "rechargeV2.6";
+let cacheName = "Smart-Recharge";
 let appShellFiles = [
     "menu.png",
     "edit.png",
@@ -31,15 +31,15 @@ self.addEventListener("fetch", (e) => {
         caches.match(e.request, {ignoreSearch: true}).then((res1) => {
             if(navigator.onLine && /(?<!min).(html|css|js)(.*?)$/g.test(e.request.url) || !res1) {
                 return fetch(e.request).then((res2) => {
-               	    return caches.open(cacheName).then((cache) => {
+                    return caches.open(cacheName).then((cache) => {
                         cache.put(e.request, res2.clone());
                         return res2;
                     })
                 })
-            } 
-            else {
-                return res1;
              }
+             else {
+             	return res1
+             } 
         })
     )
 });
