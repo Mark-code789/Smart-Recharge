@@ -436,6 +436,7 @@ class Stream {
         this.canvas.height = height;
         let ctx = this.canvas.getContext("2d");
         ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
+        ctx.filter = "invert(1)";
         this.snapshot = this.canvas.toDataURL("image/png");
         await this.recognize(this.snapshot);
     } 
@@ -647,7 +648,7 @@ class ImageProps {
         this.cvs.width = props.w2;
         let ctx = this.cvs.getContext('2d');
         ctx.drawImage(this.img, props.x, props.y, props.w, props.h, 0, 0, props.w2, props.h2);
-        
+        ctx.filter = "invert(1)";
         let snap = this.cvs.toDataURL("image/png");
         $(".crop h3").innerHTML = "scanning";
         e.target.classList.remove("enable", "disable");
