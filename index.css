@@ -392,6 +392,7 @@ hr {
 	background: #0099B1;
 	border-radius: 7.5px;
 	padding: 3px;
+	z-index: 0;
 } 
 
 .about_window .options button .toggle:before {
@@ -399,6 +400,7 @@ hr {
 	height: 12px;
 	background: #fff;
 	border-radius: 50%;
+	z-index: 1;
 } 
 
 .about_window .footer {
