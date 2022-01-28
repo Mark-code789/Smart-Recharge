@@ -311,7 +311,7 @@ body {
             } 
             var scriptVersion = Date.now();
             var deferredEvent;
-            var tesseractLoaded = false;
+            var tesseractLoaded = true;
             var rechargeLoaded = false;
             
             function pageComplete () {
@@ -335,7 +335,7 @@ body {
                 JsLink1.onload = () => {
                     scriptLoaded("tesseract");
                 };
-                JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
+                //JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
 
                 head.appendChild(JsLink0);
                 head.appendChild(JsLink1);
