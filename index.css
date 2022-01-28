@@ -395,6 +395,7 @@ hr {
 } 
 
 .about_window .options button .toggle:before {
+	position: absolute;
 	width: 12px;
 	height: 12px;
 	background: #000;
