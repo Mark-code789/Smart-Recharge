@@ -446,6 +446,7 @@ class Stream {
             await this.worker.load();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');*/
+            alert("ALERT\n\nPlease note this app is under maintenance will notify you the it is over.");
             LoadingDone();
         } catch (error) {
             console.log(error);
