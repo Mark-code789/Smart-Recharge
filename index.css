@@ -386,14 +386,9 @@ hr {
 
 .about_window .options button:before {
 	position: absolute;
-	/*top: 50%;
-	right: 20px;
-	transform: translateY(-50%);*/
 	height: 10px;
 	width: 20px;
-	border-radius: 4px;
 	background: #0099B1;
-	z-index: 1;
 } 
 
 .about_window .footer {
