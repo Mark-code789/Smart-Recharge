@@ -386,9 +386,9 @@ hr {
 
 .about_window .options button .toggle {
 	position: absolute;
-	top: calc(50% - 7.5px);
+	top: calc(50% - 9px);
 	right: 40px;
-	height: 15px;
+	height: 18px;
 	width: 30px;
 	background: #0099B1;
 	border-radius: 7.5px;
