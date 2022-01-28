@@ -74,10 +74,10 @@ async function LoadingDone() {
     $$(".hidden_footer .footer button")[0].addEventListener("click", () => Edit.makeEditable(true), false);
     $$(".hidden_footer .footer button")[1].addEventListener("click", Call, false);
     $$(".hidden_footer .footer button")[2].addEventListener("click", Rescan, false);
-    $$(".options button")[0].addEventListener("click", Options.share, false);
-    $$(".options button")[1].addEventListener("click", Options.feedback, false);
-    $$(".options button")[2].addEventListener("click", Options.contact, false);
+    $$(".options button")[1].addEventListener("click", Options.share, false);
+    $$(".options button")[2].addEventListener("click", Options.feedback, false);
     $$(".options button")[3].addEventListener("click", Options.contact, false);
+    $$(".options button")[4].addEventListener("click", Options.contact, false);
     $(".about_window .footer button").addEventListener("click", Options.back, false);
     $$(".crop .footer button")[0].addEventListener("click", ImageProps.takeSnap, false);
     $$(".crop .footer button")[1].addEventListener("click", Import.exit, false);
