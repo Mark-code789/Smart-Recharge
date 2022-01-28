@@ -384,11 +384,11 @@ hr {
     font-size: 0.8rem;
 } 
 
-.about_window .options button:before {
+.about_window .options button:after {
 	position: absolute;
 	height: 10px;
 	width: 20px;
-	background: #0099B1;
+	background: #000;
 } 
 
 .about_window .footer {
