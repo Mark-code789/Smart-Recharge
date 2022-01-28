@@ -384,7 +384,7 @@ hr {
     font-size: 0.8rem;
 } 
 
-.about_window .options button:after {
+.about_window .options button span {
 	position: absolute;
 	height: 10px;
 	width: 20px;
