@@ -394,8 +394,7 @@ hr {
 	padding: 3px;
 } 
 
-.about_window .options button .switch {
-	position: relative;
+.about_window .options button .toggle .switch {
 	width: 12px;
 	height: 12px;
 	background: #fff;
