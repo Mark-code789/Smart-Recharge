@@ -394,7 +394,7 @@ hr {
 	z-index: 0;
 } 
 
-.about_window .options button .toggle:before {
+.about_window .options button .switch {
 	position: absolute;
 	width: 12px;
 	height: 12px;
