@@ -384,7 +384,7 @@ hr {
     font-size: 0.8rem;
 } 
 
-.about_window .options button:first-of-type:before {
+.about_window .options button:first-of-type::before {
 	position: absolute;
 	top: 50%;
 	right: 20px;
