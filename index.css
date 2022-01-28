@@ -396,6 +396,8 @@ hr {
 
 .about_window .options button .switch {
 	position: absolute;
+	top: 3px;
+	right: 58px;
 	width: 12px;
 	height: 12px;
 	background: #000;
