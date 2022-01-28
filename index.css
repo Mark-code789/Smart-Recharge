@@ -393,6 +393,7 @@ hr {
 	width: 20px;
 	border-radius: 4px;
 	background: #0099B1;
+	z-index: 1;
 } 
 
 .about_window .footer {
