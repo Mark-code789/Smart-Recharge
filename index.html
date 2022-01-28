@@ -309,6 +309,7 @@ body {
             function $$$(type) {
                 return document.createElement(type);
             } 
+            var scriptVersion = Date.now();
             var deferredEvent;
             var tesseractLoaded = false;
             var rechargeLoaded = false;
@@ -325,12 +326,12 @@ body {
                 
                 SheetLink.type = "text/css";
                 SheetLink.rel = "stylesheet";
-                SheetLink.href = "index.css?v=" + Date.now();
+                SheetLink.href = "index.css?v=" + scriptVersion;
                 
                 JsLink0.onload = () => {
                     scriptLoaded("recharge");
                 };
-                JsLink0.src = "index.js?v=" + Date.now();
+                JsLink0.src = "index.js?v=" + scriptVersion;
                 JsLink1.onload = () => {
                     scriptLoaded("tesseract");
                 };
@@ -354,7 +355,7 @@ body {
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
                 	window.onload = _ => {
-                		navigator.serviceWorker.register("sw.js").then(res => {
+                		navigator.serviceWorker.register("sw.js" + scriptVersion).then(res => {
                 			pageComplete();
                	 	}).catch(error => {
                		 	pageComplete();
