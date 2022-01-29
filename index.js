@@ -130,9 +130,8 @@ class Options {
 		$(".recharged").classList.toggle("dark_theme");
 		$(".load").classList.toggle("dark_theme");
 		let theme = JSON.stringify($(".toggle").classList.contains("toggle_switch"));
-		alert(window.storage);
-		if(window.storage) {
-			window.storage.setItem("theme",  theme);
+		if(storage) {
+			storage.setItem("theme",  theme);
 		} 
 	} 
     static share = () => {
