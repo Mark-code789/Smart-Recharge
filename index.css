@@ -1021,7 +1021,8 @@ input[type="text"]:disabled {
 .dark_theme.load,
 .dark_theme.recharged,
 .dark_theme.other_number .input_form, 
-.dark_theme.scan .hidden_footer {
+.dark_theme.scan .hidden_footer, 
+.dark_theme .hidden_footer.border {
 	background: #00171A !important;
 }
 
@@ -1030,9 +1031,20 @@ input[type="text"]:disabled {
 .dark_theme .hidden_footer .text, 
 .dark_theme .input_form input[type='tel'], 
 .dark_theme.recharged p {
-	color: #fff;
+	color: #fff !important;
 }
+
+.dark_theme .hidden_footer input[type='text'] {
+	border-color: #fff;
+} 
 
 .dark_theme hr {
 	background: #E1E1E1;
+}
+
+.dark_theme h1,
+.dark_theme h2, 
+.dark_theme h3, 
+.dark_theme h4 {
+	color: #fff;
 } 
