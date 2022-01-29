@@ -128,7 +128,7 @@ class Options {
 		$(".other_number").classList.toggle("dark_theme");
 		$(".about_window").classList.toggle("dark_theme");
 		$(".recharged").classList.toggle("dark_theme");
-		$(".main").classList.toggle("dark_theme");
+		$(".load").classList.toggle("dark_theme");
 		alert(e.target);
 		if(storage) 
 			storage.setItem("theme", $(".toggle").classList.contains("toggle_switch"));
