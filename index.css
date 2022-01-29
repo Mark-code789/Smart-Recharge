@@ -1021,7 +1021,7 @@ input[type="text"]:disabled {
 .dark_theme.load,
 .dark_theme.other_number .input_form, 
 .dark_theme .scan .hidden_footer {
-	background: #2E2E2E !important;
+	background: #00171A !important;
 }
 
 /*.dark_theme .sim:before, 
