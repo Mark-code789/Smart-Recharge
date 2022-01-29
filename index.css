@@ -390,8 +390,10 @@ hr {
 	right: 40px;
 	height: 18px;
 	width: 35px;
-	background: #0099B1;
+	background: #fff;
 	border-radius: 9px;
+	border: 2px solid #0099B1;
+	transition: all 300ms linear;
 	z-index: 0;
 } 
 
@@ -401,14 +403,19 @@ hr {
 	right: 59px;
 	width: 12px;
 	height: 12px;
-	background: #fff;
+	background: #0099B1;
 	border-radius: 50%;
-	transition: transform 1s linear;
+	transition: all 300ms linear;
 	z-index: 1;
 } 
 
-.about_window .options .toggle_switch {
+.about_window .options butthon .toggle_switch:first-of-type {
+	background: #0099B1;
+} 
+
+.about_window .options butthon .toggle_switch:last-of-type {
 	transform: translateX(15px);
+	background: #fff;
 } 
 
 .about_window .footer {
