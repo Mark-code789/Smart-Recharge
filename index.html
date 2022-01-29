@@ -313,11 +313,14 @@ body {
             var deferredEvent;
             var tesseractLoaded = false;
             var rechargeLoaded = false;
+			var storage = null;
+			try {
+			    storage = localStorage;
+			} catch (error) {}
             
             function pageComplete () {
-            	if(window.storage) {
-            		let theme = window.storage.getItem("theme");
-            		alert(theme);
+            	if(storage) {
+            		let theme = storage.getItem("theme");
             		if(theme && JSON.parse(theme)) {
             			$(".load").classList.toggle("dark_theme");
             			$(".options button:first-of-type").click();
