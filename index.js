@@ -123,7 +123,7 @@ class Options {
 	static darkTheme = (e) => {
 		$(".toggle").classList.toggle("toggle_switch");
 		$(".switch").classList.toggle("toggle_switch");
-		$(".main").classList.toggole("dark_theme");
+		$(".main").classList.toggle("dark_theme");
 		alert(e.target);
 	} 
     static share = () => {
