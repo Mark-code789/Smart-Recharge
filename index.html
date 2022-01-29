@@ -315,8 +315,8 @@ body {
             var rechargeLoaded = false;
             
             function pageComplete () {
-            	if(window.storage && window.storage.getItem("theme")) {
-            		let theme = window.storage.getItem("theme");
+            	if(storage && storage.getItem("theme")) {
+            		let theme = storage.getItem("theme");
             		if(JSON.parse(theme)) {
             			$(".load").classList.toggle("dark_theme");
             			$(".options button:first-of-type").click();
