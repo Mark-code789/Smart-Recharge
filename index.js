@@ -129,8 +129,8 @@ class Options {
 		$(".about_window").classList.toggle("dark_theme");
 		$(".recharged").classList.toggle("dark_theme");
 		$(".load").classList.toggle("dark_theme");
-		if(storage) 
-			storage.setItem("theme", $(".toggle").classList.contains("toggle_switch"));
+		if(window.storage) 
+			window.storage.setItem("theme", $(".toggle").classList.contains("toggle_switch"));
 		alert(e.target);
 	} 
     static share = () => {
