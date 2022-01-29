@@ -128,7 +128,6 @@ class Options {
 		$(".other_number").classList.toggle("dark_theme");
 		$(".about_window").classList.toggle("dark_theme");
 		$(".recharged").classList.toggle("dark_theme");
-		$(".load").classList.toggle("dark_theme");
 		let theme = JSON.stringify($(".toggle").classList.contains("toggle_switch"));
 		if(storage) {
 			storage.setItem("theme",  theme);
