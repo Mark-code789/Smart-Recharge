@@ -1023,7 +1023,7 @@ input[type="text"]:disabled {
 .dark_theme.other_number .input_form, 
 .dark_theme.scan .hidden_footer, 
 .dark_theme.scan .hidden_footer .border {
-	background: #00171A !important;
+	background: #003238 !important;
 }
 
 .dark_theme .options button, 
@@ -1042,9 +1042,10 @@ input[type="text"]:disabled {
 	background: #E1E1E1 !important;
 }
 
-.dark_theme h1,
-.dark_theme h2, 
-.dark_theme h3, 
-.dark_theme h4 {
+.dark_theme.about_window h2,
+.dark_theme.about_window h3, 
+.dark_theme.recharged h2, 
+.dark_theme.load h2, 
+.dark_theme.load h3 {
 	color: #fff !important;
 } 
