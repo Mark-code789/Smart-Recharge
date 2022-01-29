@@ -124,6 +124,11 @@ class Options {
 		$(".toggle").classList.toggle("toggle_switch");
 		$(".switch").classList.toggle("toggle_switch");
 		$(".main").classList.toggle("dark_theme");
+		$(".scan").classList.toggle("dark_theme");
+		$(".other_number").classList.toggle("dark_theme");
+		$(".about_window").classList.toggle("dark_theme");
+		$(".recharged").classList.toggle("dark_theme");
+		$(".main").classList.toggle("dark_theme");
 		alert(e.target);
 	} 
     static share = () => {
