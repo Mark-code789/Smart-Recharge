@@ -403,8 +403,12 @@ hr {
 	height: 12px;
 	background: #fff;
 	border-radius: 50%;
-	overflow: visible;
+	transition: transform 1s linear;
 	z-index: 1;
+} 
+
+.about_window .potions .toggle_switch {
+	transform: translateX(15px);
 } 
 
 .about_window .footer {
