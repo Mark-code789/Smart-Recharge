@@ -120,7 +120,7 @@ const About = () => {
 } 
 
 class Options {
-	static darkTheme = (e) => {
+	static darkTheme = () => {
 		$(".toggle").classList.toggle("toggle_switch");
 		$(".switch").classList.toggle("toggle_switch");
 		$(".main").classList.toggle("dark_theme");
