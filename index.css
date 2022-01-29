@@ -1014,14 +1014,17 @@ input[type="text"]:disabled {
 }
 
 
-
+.dark_theme .sim:before, 
+.dark_theme input[type="radio"]:before, 
 .dark_theme .sims, 
 .dark_theme.about_window, 
-.other_number .input_form {
+.dark_theme.load,
+.dark_theme.other_number .input_form, 
+.dark_theme .scan .hidden_footer {
 	background: #2E2E2E !important;
 }
 
-.dark_theme .sim:before, 
+/*.dark_theme .sim:before, 
 .dark_theme input[type="radio"]:before {
 	background: #2E2E2E !important;
-}
+}*/
