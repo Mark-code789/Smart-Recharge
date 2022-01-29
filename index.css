@@ -1025,6 +1025,10 @@ input[type="text"]:disabled {
 	background: #00171A !important;
 }
 
-.dark_theme .options button {
+.dark_theme .options button, 
+.dark_theme .hidden_footer input[type='text'], 
+.dark_theme .hidden_footer .text, 
+.dark_theme .input_form input[type='tel'], 
+.dark_theme.recharged p {
 	color: #fff;
 } 
