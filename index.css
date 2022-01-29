@@ -393,7 +393,7 @@ hr {
 	background: #fff;
 	border-radius: 9px;
 	border: 2px solid #0099B1;
-	transition: all 300ms linear;
+	transition: all 0.3s linear;
 	z-index: 0;
 } 
 
@@ -405,15 +405,15 @@ hr {
 	height: 12px;
 	background: #0099B1;
 	border-radius: 50%;
-	transition: all 300ms linear;
+	transition: all 0.3s linear;
 	z-index: 1;
 } 
 
-.about_window .options butthon .toggle_switch:first-of-type {
+.about_window .options button .toggle_switch:first-of-type {
 	background: #0099B1;
 } 
 
-.about_window .options butthon .toggle_switch:last-of-type {
+.about_window .options button .toggle_switch:last-of-type {
 	transform: translateX(15px);
 	background: #fff;
 } 
