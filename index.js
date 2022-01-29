@@ -130,8 +130,8 @@ class Options {
 		$(".recharged").classList.toggle("dark_theme");
 		$(".load").classList.toggle("dark_theme");
 		let theme = JSON.stringify($(".toggle").classList.contains("toggle_switch"));
+		alert(storage);
 		if(window.storage) {
-			alert(theme);
 			window.storage.setItem("theme",  theme);
 		} 
 	} 
