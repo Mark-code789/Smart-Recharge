@@ -1016,29 +1016,25 @@ input[type="text"]:disabled {
 
 
 .dark_theme .sims {
-	background: #2E2E2E;
+	background: #2E2E2E !important;
 }
 
 .dark_theme h1, 
 .dark_theme h2,
 .dark_theme h3,
 .dark_theme h4 {
-	color: #757575;
+	color: #757575 !important;
 }
 
-.dark_theme .sim:before {
-	background: #2E2E2E;
-}
-
+.dark_theme .sim:before, 
 .dark_theme input[type="radio"]:before {
-	background: #2E2E2E;
+	background: #2E2E2E !important;
 } 
 
-.dark_theme .main .footer button, 
-.dark_theme .crop .footer button, 
-.dark_theme .recharged .footer button {
-    
-    border: 2px solid #757575;
+.dark_theme.main .footer button, 
+.dark_theme.crop .footer button, 
+.dark_theme.recharged .footer button {
+    border-color: #757575;
     background: #0099B1;
     color: #757575;
 } 
