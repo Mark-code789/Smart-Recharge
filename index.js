@@ -122,7 +122,7 @@ const About = () => {
 class Options {
 	static darkTheme = (e) => {
 		alert(e.target);
-		e.target.classList.toggle("toggle_switch"):
+		e.target.classList.toggle("toggle_switch");
 	} 
     static share = () => {
         if(navigator.canShare) {
