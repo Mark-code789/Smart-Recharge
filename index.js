@@ -457,6 +457,12 @@ class Stream {
     } 
     static initTesseract = async () => {
         try {
+        	if(storage) {
+        		let theme = storage.getItem("theme");
+        		if(theme && JSON.parse(theme)) {
+        			Options.darkTheme();
+        		} 
+        	} 
             this.worker = Tesseract.createWorker();
             await this.worker.load();
             await this.worker.loadLanguage('eng');
