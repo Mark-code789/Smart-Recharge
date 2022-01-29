@@ -407,7 +407,7 @@ hr {
 	z-index: 1;
 } 
 
-.about_window .potions .toggle_switch {
+.about_window .options .toggle_switch {
 	transform: translateX(15px);
 } 
 
