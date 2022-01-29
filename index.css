@@ -1022,7 +1022,7 @@ input[type="text"]:disabled {
 .dark_theme.recharged,
 .dark_theme.other_number .input_form, 
 .dark_theme.scan .hidden_footer, 
-.dark_theme .hidden_footer.border {
+.dark_theme.scan .hidden_footer .border {
 	background: #00171A !important;
 }
 
@@ -1035,16 +1035,16 @@ input[type="text"]:disabled {
 }
 
 .dark_theme .hidden_footer input[type='text'] {
-	border-color: #fff;
+	border-color: #fff !important;
 } 
 
 .dark_theme hr {
-	background: #E1E1E1;
+	background: #E1E1E1 !important;
 }
 
 .dark_theme h1,
 .dark_theme h2, 
 .dark_theme h3, 
 .dark_theme h4 {
-	color: #fff;
+	color: #fff !important;
 } 
