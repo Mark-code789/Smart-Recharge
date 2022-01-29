@@ -120,8 +120,8 @@ const About = () => {
 } 
 
 class Options {
-	static darkTheme = (elem) => {
-		elem.classList.toggle("toggle_switch"):
+	static darkTheme = (e) => {
+		e.target.classList.toggle("toggle_switch"):
 	} 
     static share = () => {
         if(navigator.canShare) {
