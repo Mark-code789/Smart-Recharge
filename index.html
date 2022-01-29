@@ -323,7 +323,7 @@ body {
             		let theme = storage.getItem("theme");
             		if(theme && JSON.parse(theme)) {
             			$(".load").classList.toggle("dark_theme");
-            			$(".options button:first-of-type").click();
+            			Options.darkTheme();
             		} 
             	} 
                 window.addEventListener("beforeinstallprompt", e => {
