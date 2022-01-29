@@ -74,6 +74,7 @@ async function LoadingDone() {
     $$(".hidden_footer .footer button")[0].addEventListener("click", () => Edit.makeEditable(true), false);
     $$(".hidden_footer .footer button")[1].addEventListener("click", Call, false);
     $$(".hidden_footer .footer button")[2].addEventListener("click", Rescan, false);
+    $$(".options button")[0].addEventListener("click", Options.darkTheme, false);
     $$(".options button")[1].addEventListener("click", Options.share, false);
     $$(".options button")[2].addEventListener("click", Options.feedback, false);
     $$(".options button")[3].addEventListener("click", Options.contact, false);
@@ -119,6 +120,9 @@ const About = () => {
 } 
 
 class Options {
+	static darkTheme = (elem) => {
+		elem.classList.toggle("toggle_switch"):
+	} 
     static share = () => {
         if(navigator.canShare) {
             navigator.share({
