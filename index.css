@@ -1031,4 +1031,8 @@ input[type="text"]:disabled {
 .dark_theme .input_form input[type='tel'], 
 .dark_theme.recharged p {
 	color: #fff;
+}
+
+.dark_theme hr {
+	background: #E1E1E1;
 } 
