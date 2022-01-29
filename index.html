@@ -317,6 +317,7 @@ body {
             function pageComplete () {
             	if(window.storage && window.storage.getItem("theme")) {
             		let theme = window.storage.getItem("theme");
+            		alert(theme);
             		if(JSON.parse(theme)) {
             			$(".load").classList.toggle("dark_theme");
             			$(".options button:first-of-type").click();
