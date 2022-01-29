@@ -121,8 +121,8 @@ const About = () => {
 
 class Options {
 	static darkTheme = (e) => {
-		alert(e.target);
 		e.target.$(".switch").classList.toggle("toggle_switch");
+		alert(e.target);
 	} 
     static share = () => {
         if(navigator.canShare) {
