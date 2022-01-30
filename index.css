@@ -1018,7 +1018,6 @@ input[type="text"]:disabled {
 .dark_theme input[type="radio"]:before, 
 .dark_theme .sims, 
 .dark_theme.about_window, 
-.dark_theme.load,
 .dark_theme.recharged,
 .dark_theme.other_number .input_form, 
 .dark_theme.scan .hidden_footer, 
@@ -1044,8 +1043,6 @@ input[type="text"]:disabled {
 
 .dark_theme.about_window h2,
 .dark_theme.about_window h3, 
-.dark_theme.recharged h2, 
-.dark_theme.load h2, 
-.dark_theme.load h3 {
+.dark_theme.recharged h2 {
 	color: #fff !important;
 } 
