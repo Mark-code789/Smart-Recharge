@@ -342,7 +342,7 @@ class Edit {
 	            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
 	        } 
 			Notify(pst);
-	        if(pst%SIM.group == 0) pst++;
+	        //if(pst%(SIM.group + 1) == 0) pst++;
 	        $(".width_generator").innerHTML = value;0
 	        $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
 	        $("input[type=text]").value = value;
