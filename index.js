@@ -431,7 +431,7 @@ class Stream {
             this.timeout = setTimeout(this.takeSnapshot, 3000);
             return {res: true};
         } catch (error) {
-            console.log(error);
+            alert(error);
             return {error: new Error("Can't compete action. Access to camera denied."), res: false};
         } 
     } 
