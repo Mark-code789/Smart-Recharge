@@ -378,7 +378,7 @@ body {
                 if(deferredEvent == "passed") {
 		            $(".install_prompt").style.display = "block";
 		            $(".install_prompt").classList.add("show_install_prompt");
-					alert("Showing install prompt.");
+					alert($(".install_prompt").classList.contains("show_install_prompt"));
 				} 
                 else {
 					deferredEvent = e;
