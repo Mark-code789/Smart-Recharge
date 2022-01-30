@@ -381,6 +381,7 @@ body {
                 if("serviceWorker" in navigator) {
                 	navigator.serviceWorker.onmessage = function(e) {
 						if(e.data && e.data.type == "version") {
+							alert(e.data.version);
 							if(e.data.version < 283) {
 								navigator.serviceWorker.register("sw.js").then(res => {
 		                			pageComplete();
