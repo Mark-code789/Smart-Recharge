@@ -391,10 +391,10 @@ const SIM = {
 const CONSTRAINTS = {
     video: {
         width: {
-            exact: window.innerWidth
+            exact: window.innerHeight
         }, 
         height: {
-            exact: window.innerHeight
+            exact: window.innerWidth
         },
         facingMode: 'environment', 
         focusMode: 'continuous'
