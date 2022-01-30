@@ -377,7 +377,7 @@ body {
                 alert(deferredEvent);
                 if(deferredEvent == "passed") {
 		            $(".install_prompt").style.display = "block";
-		            $(".install_prompt").classList.add("show_install_prompt");
+		            $(".install_prompt").classList.toggle("show_install_prompt");
 					alert($(".install_prompt").classList.contains("show_install_prompt"));
 				} 
                 else {
