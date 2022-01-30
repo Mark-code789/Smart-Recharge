@@ -370,7 +370,7 @@ body {
                     rechargeLoaded = true;
                 
                 if(tesseractLoaded && rechargeLoaded) 
-                    Stream.initTesseract();
+                	LoadingDone();
             } 
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
