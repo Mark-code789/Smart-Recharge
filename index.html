@@ -341,6 +341,7 @@ body {
             		} 
             	} 
                 window.addEventListener("beforeinstallprompt", (e) => {
+                	alert("there is event.");
                     e.preventDefault();
                     deferredEvent = e;
                 });
