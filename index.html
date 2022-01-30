@@ -382,6 +382,7 @@ body {
 				            $(".install_prompt").style.display = "block";
 				            $(".install_prompt").classList.add("show_install_prompt");
 						}, 1);
+						deferredEvent = "passed";
 					} catch (error) {
 						reportError(error);
 					} 
