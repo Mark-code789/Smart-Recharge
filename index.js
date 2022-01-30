@@ -111,7 +111,7 @@ async function LoadingDone() {
         $(".contact_picker").classList.add("enable");
     } 
     
-    if(deferredEvent && deferredEvent != "passed") {
+    if(deferredEvent && (!$(".install_prompt").classList.contains("show_install_prompt") || !$(".install_prompt").classList.contains("hide_install_prompt"))) {
         setTimeout(() => {
             $(".install_prompt").style.display = "block";
             $(".install_prompt").classList.add("show_install_prompt");
