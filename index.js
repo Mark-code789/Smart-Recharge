@@ -419,7 +419,7 @@ class Stream {
         try {
         	if(!this.ready) {
         		this.called = true;
-        		return Notify("Initializing Scanner...<br>Please wait...");
+        		return {error: new Error("Initializing Scanner...<br>Please wait..."), res: false};
         	} 
             this.stream = await navigator.mediaDevices.getUserMedia(CONSTRAINTS);
             this.laser.style.animationPlayState = "running";
