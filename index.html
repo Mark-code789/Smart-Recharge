@@ -378,6 +378,7 @@ body {
                 if(deferredEvent == "passed") {
                 	try {
 			            $(".install_prompt").style.display = "block";
+						alert(document.getComputedStyle($(".install_prompt"), null).getPropertyValue("display"));
 			            //;$(".install_prompt").classList.toggle("show_install_prompt");
 						alert($(".install_prompt").classList.contains("show_install_prompt"));
 					} catch (error) {
