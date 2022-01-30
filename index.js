@@ -671,9 +671,14 @@ class ImageProps {
     static img;
     static frame;
     static init = () => {
-        this.cvs = $$$("canvas");
-        this.frame = $(".crop_frame");
-        this.img = $("img");
+    	try {
+	        this.cvs = $$$("canvas");
+	        this.frame = $(".crop_frame");
+	        this.img = $("img");
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
     static getProps = () => {
     	try {
