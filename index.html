@@ -340,19 +340,6 @@ body {
             			$(".load").classList.toggle("dark_theme");
             		} 
             	} 
-                window.addEventListener("beforeinstallprompt", (e) => {
-                    e.preventDefault();
-                    alert(deferredEvent);
-                    if(deferredEvent == "passed") {
-                    	setTimeout(() => {
-				            $(".install_prompt").style.display = "block";
-				            $(".install_prompt").classList.add("show_install_prompt");
-				        }, 500);
-					} 
-                    else {
-						deferredEvent = e;
-					}
-                });
                 let head = document.head;
                 let SheetLink = $$$("link");
                 let JsLink0 = $$$("script");
@@ -384,6 +371,20 @@ body {
                 if(tesseractLoaded && rechargeLoaded) 
                 	LoadingDone();
             } 
+            
+            window.addEventListener("beforeinstallprompt", (e) => {
+                e.preventDefault();
+                alert(deferredEvent);
+                if(deferredEvent == "passed") {
+                	setTimeout(() => {
+			            $(".install_prompt").style.display = "block";
+			            $(".install_prompt").classList.add("show_install_prompt");
+			        }, 500);
+				} 
+                else {
+					deferredEvent = e;
+				}
+            });
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
