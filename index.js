@@ -341,7 +341,7 @@ class Edit {
 	            let slice = text.slice(i, j);
 	            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
 	        } 
-			Notify(pst);
+			
 	        if(elem.value.length < value.length && pst%(SIM.group+1) == 0) pst++;
 	        $(".width_generator").innerHTML = value;
 	        elem.style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
