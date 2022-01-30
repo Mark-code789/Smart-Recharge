@@ -331,16 +331,25 @@ class Edit {
             $("input[type=text]").disabled = true;
         } 
     } 
-    static text = e => {
-        let text = e == undefined? $("input[type=text]").value: e.target.value.replace(/\s+/g, '');
-        let value = "";
-        for(let i = 0, j = SIM.group; i < text.length; i += SIM.group, j += SIM.group) {
-            let slice = text.slice(i, j);
-            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
-        } 
-        $(".width_generator").innerHTML = value;
-        $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
-        $("input[type=text]").value = value;
+    static text = (e) => {
+    	try {
+	    	let elem = e == undefined? $("input[type=text]"): e.target;
+	        let text = e == undefined? $("input[type=text]").value: e.target.value.replace(/\s+/g, '');
+	        let pst = window.getSelectionRange().anchorOffset;
+	        let value = "";
+	        for(let i = 0, j = SIM.group; i < text.length; i += SIM.group, j += SIM.group) {
+	            let slice = text.slice(i, j);
+	            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
+	        } 
+			Notify(pst);
+	        if(pst%SIM.group == 0) pst++;
+	        $(".width_generator").innerHTML = value;0
+	        $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
+	        $("input[type=text]").value = value;
+	        this.setCaret($("input[type=text]"), pst);
+		} catch (error) {
+			reportError(error);
+		} 
     } 
     static tel = e => {
         let contact = typeof e == "string"? e: e.target.value;
@@ -359,6 +368,19 @@ class Edit {
             $$(".other_number .footer button")[0].classList.remove("enable", "disable");
             $$(".other_number .footer button")[0].classList.add("disable");
         } 
+    } 
+    static setCaret = (elem, pst) => {
+    	if(elem != null) {
+    		if(elem.createTextRange) {
+    			let range = elem.createTextRange();
+    			range.move('character', pst);
+    			range.select();
+    		} 
+    		else if(elem.selectionStart) {
+    			elem.focus();
+    			elem.setSelectionRange(pst, pst);
+    		} 
+    	} 
     } 
 } 
 
