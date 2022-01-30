@@ -1021,7 +1021,8 @@ input[type="text"]:disabled {
 .dark_theme.recharged,
 .dark_theme.other_number .input_form, 
 .dark_theme.scan .hidden_footer, 
-.dark_theme.scan .hidden_footer .border {
+.dark_theme.scan .hidden_footer .border,
+.dark_theme .hidden_footer input[type='text'] {
 	background: #003238 !important;
 }
 
