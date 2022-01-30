@@ -111,12 +111,14 @@ async function LoadingDone() {
         $(".contact_picker").classList.add("enable");
     } 
     
-    alert(deferredEvent);
     if(deferredEvent) {
         setTimeout(() => {
             $(".install_prompt").style.display = "block";
             $(".install_prompt").classList.add("show_install_prompt");
         }, 1000);
+    } 
+    else {
+    	deferredEvent = "passed";
     } 
     
     history.pushState(null, "", "");
