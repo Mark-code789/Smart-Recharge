@@ -334,7 +334,7 @@ class Edit {
     static text = (e) => {
     	try {
 	    	let elem = e == undefined? $("input[type=text]"): e.target;
-	        let text = e == undefined? $("input[type=text]").value: e.target.value.replace(/\s+/g, '');
+	        let text = elem.value.replace(/\s+/g, '');
 	        let pst = elem.selectionStart;
 	        let value = "";
 	        for(let i = 0, j = SIM.group; i < text.length; i += SIM.group, j += SIM.group) {
@@ -342,11 +342,11 @@ class Edit {
 	            value += slice + (slice.length == SIM.group && text.charAt(j)? ' ': '');
 	        } 
 			Notify(pst);
-	        //if(pst%(SIM.group + 1) == 0) pst++;
-	        $(".width_generator").innerHTML = value;0
-	        $("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
-	        $("input[type=text]").value = value;
-	        this.setCaret($("input[type=text]"), pst);
+	        if(elem.value.length < value.length && pst%(SIM.group+1) == 0) pst++;
+	        $(".width_generator").innerHTML = value;
+	        elem.style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
+	        elem.value = value;
+	        this.setCaret(elem, pst);
 		} catch (error) {
 			reportError(error);
 		} 
