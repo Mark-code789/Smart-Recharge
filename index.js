@@ -475,7 +475,7 @@ class Stream {
             await this.worker.initialize('eng');
             this.ready = true;
             if(this.called)
-            	this.start();
+            	Scan(false);
         } catch (error) {
             console.log(error);
         } 
