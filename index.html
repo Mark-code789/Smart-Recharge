@@ -379,10 +379,8 @@ body {
                 e.preventDefault();
                 if(deferredEvent == "passed") {
                 	try {
-                		setTimeout(() => {
-				            $(".install_prompt").style.display = "block";
-				            $(".install_prompt").classList.add("show_install_prompt");
-						}, 1);
+			            $(".install_prompt").style.display = "block";
+			            $(".install_prompt").classList.add("show_install_prompt");
 					} catch (error) {
 						reportError(error);
 					} 
