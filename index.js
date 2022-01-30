@@ -431,41 +431,55 @@ class Stream {
             this.timeout = setTimeout(this.takeSnapshot, 3000);
             return {res: true};
         } catch (error) {
-            alert(error);
+            reportError(error);
             return {error: new Error("Can't compete action. Access to camera denied."), res: false};
         } 
     } 
     static pause = () => {
-        this.started = false;
-        this.video.pause();
-        this.track.stop();
-        this.laser.style.animationPlayState = "paused";
-        clearTimeout(this.timeout);
-        $(".flashlight").classList.remove("flashlight_on");
-        $(".flashlight").classList.add("flashlight_off");
+    	try {
+	        this.started = false;
+	        this.video.pause();
+	        this.track.stop();
+	        this.laser.style.animationPlayState = "paused";
+	        clearTimeout(this.timeout);
+	        $(".flashlight").classList.remove("flashlight_on");
+	        $(".flashlight").classList.add("flashlight_off");
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
     static getCapabilities = async () => {
-        await setTimeout(_ => {}, 500);
-        this.capabilities = await this.track.getCapabilities();
-        if(this.capabilities.torch) {
-            $(".flashlight").classList.remove("disable");
-            $(".flashlight").classList.add("enable");
-        } 
+    	try {
+	        await setTimeout(_ => {}, 500);
+	        this.capabilities = await this.track.getCapabilities();
+	        if(this.capabilities.torch) {
+	            $(".flashlight").classList.remove("disable");
+	            $(".flashlight").classList.add("enable");
+	        } 
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
     static takeSnapshot = async () => {
-        $(".scan .header h3").innerHTML = "scanning";
-        let scannerFrame = $(".scanner_frame");
-        let width = parseInt(_$(scannerFrame, "width"));
-        let height = parseInt(_$(scannerFrame, "height"));
-        let left = _$$(scannerFrame, scannerFrame.parentNode).left;
-        let top = _$$(scannerFrame, scannerFrame.parentNode).top
-        this.canvas.width = width;
-        this.canvas.height = height;
-        let ctx = this.canvas.getContext("2d");
-        ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
-        ctx.filter = "invert(1)";
-        this.snapshot = this.canvas.toDataURL("image/png");
-        await this.recognize(this.snapshot);
+    	try {
+	        $(".scan .header h3").innerHTML = "scanning";
+	        let scannerFrame = $(".scanner_frame");
+	        let width = parseInt(_$(scannerFrame, "width"));
+	        let height = parseInt(_$(scannerFrame, "height"));
+	        let left = _$$(scannerFrame, scannerFrame.parentNode).left;
+	        let top = _$$(scannerFrame, scannerFrame.parentNode).top
+	        this.canvas.width = width;
+	        this.canvas.height = height;
+	        let ctx = this.canvas.getContext("2d");
+	        ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
+	        ctx.filter = "invert(1)";
+	        this.snapshot = this.canvas.toDataURL("image/png");
+	        await this.recognize(this.snapshot);
+		} catch (error) {
+			reportError(error);
+		} 
     } 
     static initTesseract = async () => {
         try {
@@ -475,77 +489,87 @@ class Stream {
             await this.worker.initialize('eng');
             this.ready = true;
             if(this.called)
-            	Scan(false);
+            	await Scan(false);
         } catch (error) {
-            console.log(error);
+            reportError(error);
         } 
     } 
     static recognize = async (img, importWindow, retake) => {
-        let res = await this.worker.recognize(img);
-        let texts = res.data.text.split("\n");
-        let text = "";
-        for(let t of texts) {
-            if(t.length > text.length)
-                text = t;
-        }
-        
-        text = text.replace(/\D+/g, "");
-        if(text.length > 7) {
-            this.pause();
-            try {
-                navigator.vibrate(150);
-            } catch (error) {}
-            
-            if(importWindow) {
-                $(".crop").style.display = "none";
-                $(".scan").style.display = "grid";
-                $(".crop .footer button").classList.remove("disable", "enable");
-                $(".crop .footer button").classList.add("enable");
-                $(".crop h3").innerHTML = "Pinch to zoom. Drag to move";
-                img = $("img");
-                img.style.height = "100%";
-                img.style.width = "100%";
-                img.style.top = "0";
-                img.style.left = "0";
-                let frame = $(".crop_frame");
-                frame.style.height = "80px";
-                frame.style.width = "160px";
-                frame.style.top = "calc(50% - 40px)";
-                frame.style.left = "calc(50% - 80px)";
-            } 
-            $(".scan .header h3").innerHTML = "Please confirm the top up code.";
-            $("input[type=text]").value = text;
-            $(".width_generator").innerHTML = text;
-        	$("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
-            await Edit.text();
-            $(".hidden_footer").classList.remove("show", "hide");
-            $(".hidden_footer").classList.add("show");
-        } 
-        else {
-            if(importWindow) {
-                if(retake) {
-                    alert("Please ensure you crop the image to only expose the digital code.");
-                    $(".crop .footer button").classList.remove("disable", "enable");
-                    $(".crop .footer button").classList.add("enable");
-                } else {
-                    this.recognize(img, importWindow, true);
-                } 
-            } 
-            else {
-                this.takeSnapshot();
-            } 
-        } 
+    	try {
+	        let res = await this.worker.recognize(img);
+	        let texts = res.data.text.split("\n");
+	        let text = "";
+	        for(let t of texts) {
+	            if(t.length > text.length)
+	                text = t;
+	        }
+	        
+	        text = text.replace(/\D+/g, "");
+	        if(text.length > 7) {
+	            this.pause();
+	            try {
+	                navigator.vibrate(150);
+	            } catch (error) {}
+	            
+	            if(importWindow) {
+	                $(".crop").style.display = "none";
+	                $(".scan").style.display = "grid";
+	                $(".crop .footer button").classList.remove("disable", "enable");
+	                $(".crop .footer button").classList.add("enable");
+	                $(".crop h3").innerHTML = "Pinch to zoom. Drag to move";
+	                img = $("img");
+	                img.style.height = "100%";
+	                img.style.width = "100%";
+	                img.style.top = "0";
+	                img.style.left = "0";
+	                let frame = $(".crop_frame");
+	                frame.style.height = "80px";
+	                frame.style.width = "160px";
+	                frame.style.top = "calc(50% - 40px)";
+	                frame.style.left = "calc(50% - 80px)";
+	            } 
+	            $(".scan .header h3").innerHTML = "Please confirm the top up code.";
+	            $("input[type=text]").value = text;
+	            $(".width_generator").innerHTML = text;
+	        	$("input[type=text]").style.width = `${$(".width_generator").getBoundingClientRect().width}px`;
+	            await Edit.text();
+	            $(".hidden_footer").classList.remove("show", "hide");
+	            $(".hidden_footer").classList.add("show");
+	        } 
+	        else {
+	            if(importWindow) {
+	                if(retake) {
+	                    alert("Please ensure you crop the image to only expose the digital code.");
+	                    $(".crop .footer button").classList.remove("disable", "enable");
+	                    $(".crop .footer button").classList.add("enable");
+	                } else {
+	                    this.recognize(img, importWindow, true);
+	                } 
+	            } 
+	            else {
+	                this.takeSnapshot();
+	            } 
+	        } 
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
     static flashlight = async (on) => {
-        this.torch = on;
-        if(on) {
-            this.track.applyConstraints({
-                advanced: [{torch: true}]
-            }).catch(error => {console.log(error);});
-        } else {
-            await this.pause();
-            await this.start();
-        } 
+    	try {
+	        this.torch = on;
+	        if(on) {
+	            this.track.applyConstraints({
+	                advanced: [{torch: true}]
+	            }).catch(error => {console.log(error);});
+	        } else {
+	            await this.pause();
+	            await this.start();
+	        } 
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
 }
 
