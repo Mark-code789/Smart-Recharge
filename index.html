@@ -292,6 +292,7 @@ body {
                 HideInstallPrompt();
                 deferredEvent.prompt();
                 const {outcome} = await deferredEvent.userChoice;
+                alert(outcome);
                 deferredEvent = null;
             } 
             function _$(elem, property, float) {
