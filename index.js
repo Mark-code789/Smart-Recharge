@@ -56,6 +56,13 @@ async function load (i = 0) {
 }
 
 async function LoadingDone() {
+	Stream.initTesseract();
+	if(storage) {
+		let theme = storage.getItem("theme");
+		if(theme && JSON.parse(theme)) {
+			Options.darkTheme();
+		} 
+	} 
     ImageProps.init();
     $(".spinner").style.animationPlayState = "paused";
     $(".load").style.display = "none";
@@ -406,8 +413,14 @@ class Stream {
     static timeout;
     static torch = false;
     static started = false;
+    static ready = false;
+    static called = false;
     static start = async () => {
         try {
+        	if(!this.ready) {
+        		this.called = true;
+        		return Notify.alertMsg("Initializing Scanner...<br>Please wait...");
+        	} 
             this.stream = await navigator.mediaDevices.getUserMedia(CONSTRAINTS);
             this.laser.style.animationPlayState = "running";
             this.started = true;
@@ -456,18 +469,13 @@ class Stream {
     } 
     static initTesseract = async () => {
         try {
-        	if(storage) {
-        		let theme = storage.getItem("theme");
-        		if(theme && JSON.parse(theme)) {
-        			Options.darkTheme();
-        		} 
-        	} 
             this.worker = Tesseract.createWorker();
             await this.worker.load();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');
-            //alert("ALERT\n\nPlease note this app is under maintenance will notify you when we are back.");
-            LoadingDone();
+            this.ready = true;
+            if(this.called)
+            	this.start();
         } catch (error) {
             console.log(error);
         } 
