@@ -335,7 +335,7 @@ class Edit {
     	try {
 	    	let elem = e == undefined? $("input[type=text]"): e.target;
 	        let text = e == undefined? $("input[type=text]").value: e.target.value.replace(/\s+/g, '');
-	        let pst = window.getSelection().anchorOffset;
+	        let pst = window.getSelection().focusOffset;
 	        let value = "";
 	        for(let i = 0, j = SIM.group; i < text.length; i += SIM.group, j += SIM.group) {
 	            let slice = text.slice(i, j);
