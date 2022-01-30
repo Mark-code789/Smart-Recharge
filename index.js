@@ -104,7 +104,7 @@ async function LoadingDone() {
     Stream.video = $("video");
     Stream.laser = $(".laser");
     Stream.canvas = $$$("canvas");
-    CONSTRAINTS.video.width.exact = parseInt(_$($(".scan"), "grid-template-rows").split(" ")[1]);
+    CONSTRAINTS.video.height.exact = parseInt(_$($(".scan"), "grid-template-rows").split(" ")[1]);
     alert(_$($(".scan"), "grid-template-rows"));
     
     if('contacts' in navigator && navigator.contacts.select) {
@@ -399,10 +399,10 @@ const SIM = {
 const CONSTRAINTS = {
     video: {
         width: {
-            exact: window.innerHeight
+            exact: window.innerWidth
         }, 
         height: {
-            exact: window.innerWidth
+            exact: window.innerHeight
         },
         facingMode: 'environment', 
         focusMode: 'continuous'
