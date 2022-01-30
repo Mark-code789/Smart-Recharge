@@ -58,3 +58,16 @@ self.addEventListener("activate", (e) => {
         })
     )
 });
+
+self.addEventListener("message", (e) => {
+	self.clients.matchAll({includeUncontrolled: true, type: 'window'}).
+	then((clients) => {
+		if(clients && clients.length) {
+			if(e.data && e.data.type == "get-version") 
+				clients[0].postMessage({
+					type: 'version', 
+					version: 282
+				});
+		} 
+	});
+});
