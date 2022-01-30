@@ -39,7 +39,7 @@ async function load (i = 0) {
             src = await URL.createObjectURL(new Blob([arrBuff], {type: "image/png"}));
             document.documentElement.style.setProperty(imageProps[i], `url(${src})`);
             
-            if(i < srcs.length-2)
+            if(i < srcs.length-1)
                 load(i+1);
             /*else
                 LoadingDone();*/
