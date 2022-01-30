@@ -122,7 +122,7 @@ async function LoadingDone() {
 } 
 
 function reportError(error) {
-	alert(error.title + error.message + error.lineNumber);
+	alert(error.title + "\n" + error.message + "\n" + error.lineNumber);
 } 
 
 const About = () => {
