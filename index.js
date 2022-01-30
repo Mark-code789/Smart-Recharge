@@ -676,41 +676,51 @@ class ImageProps {
         this.img = $("img");
     } 
     static getProps = () => {
-        let aspectRatio = this.img.naturalWidth / this.img.naturalHeight;
-        let w1, h1;
-        
-        if(window.innerWidth < window.innerHeight) {
-            w1 = _$(this.img, "width", true);
-            h1 = w1 * Math.pow(aspectRatio, -1);
-        } 
-        else {
-            h1 = _$(this.img, "height", true)
-            w1 = h1 * aspectRatio;
-        } 
-        let x1 = _$(this.img, "left", true) + ((_$(this.img, "width", true)/2) - (w1/2));
-        let y1 = _$(this.img, "top", true) + ((_$(this.img, "height", true)/2) - (h1/2));
-        let h2 = _$(this.frame, "height", true);
-        let w2 = _$(this.frame, "width", true);
-        let x2 = _$(this.frame, "left", true);
-        let y2 = _$(this.frame, "top", true);
-        let x = this.img.naturalWidth * (x2-x1) / w1;
-        let y = this.img.naturalHeight * (y2-y1) / h1;
-        let h = h2 * this.img.naturalHeight / h1;
-        let w = w2 * this.img.naturalWidth / w1;
-        return {x1, y1, w1, h1, x2, y2, w2, h2, x, y, w, h};
+    	try {
+	        let aspectRatio = this.img.naturalWidth / this.img.naturalHeight;
+	        let w1, h1;
+	        
+	        if(window.innerWidth < window.innerHeight) {
+	            w1 = _$(this.img, "width", true);
+	            h1 = w1 * Math.pow(aspectRatio, -1);
+	        } 
+	        else {
+	            h1 = _$(this.img, "height", true)
+	            w1 = h1 * aspectRatio;
+	        } 
+	        let x1 = _$(this.img, "left", true) + ((_$(this.img, "width", true)/2) - (w1/2));
+	        let y1 = _$(this.img, "top", true) + ((_$(this.img, "height", true)/2) - (h1/2));
+	        let h2 = _$(this.frame, "height", true);
+	        let w2 = _$(this.frame, "width", true);
+	        let x2 = _$(this.frame, "left", true);
+	        let y2 = _$(this.frame, "top", true);
+	        let x = this.img.naturalWidth * (x2-x1) / w1;
+	        let y = this.img.naturalHeight * (y2-y1) / h1;
+	        let h = h2 * this.img.naturalHeight / h1;
+	        let w = w2 * this.img.naturalWidth / w1;
+	        return {x1, y1, w1, h1, x2, y2, w2, h2, x, y, w, h};
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
     static takeSnap = e => {
-        let props = this.getProps();
-        this.cvs.height = props.h2;
-        this.cvs.width = props.w2;
-        let ctx = this.cvs.getContext('2d');
-        ctx.drawImage(this.img, props.x, props.y, props.w, props.h, 0, 0, props.w2, props.h2);
-        ctx.filter = "invert(1)";
-        let snap = this.cvs.toDataURL("image/png");
-        $(".crop h3").innerHTML = "scanning";
-        e.target.classList.remove("enable", "disable");
-        e.target.classList.add("disable");
-        Stream.recognize(snap, $(".crop"));
+    	try {
+	        let props = this.getProps();
+	        this.cvs.height = props.h2;
+	        this.cvs.width = props.w2;
+	        let ctx = this.cvs.getContext('2d');
+	        ctx.drawImage(this.img, props.x, props.y, props.w, props.h, 0, 0, props.w2, props.h2);
+	        ctx.filter = "invert(1)";
+	        let snap = this.cvs.toDataURL("image/png");
+	        $(".crop h3").innerHTML = "scanning";
+	        e.target.classList.remove("enable", "disable");
+	        e.target.classList.add("disable");
+	        Stream.recognize(snap, $(".crop"));
+		} 
+		catch (error) {
+			reportError(error);
+		} 
     } 
 } 
 
