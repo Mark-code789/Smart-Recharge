@@ -121,6 +121,10 @@ async function LoadingDone() {
     history.pushState(null, "", "");
 } 
 
+function reportError(error) {
+	alert(error);
+} 
+
 const About = () => {
     $(".about_window").style.display = "block";
     $(".main").style.display = "none";
