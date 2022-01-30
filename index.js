@@ -1,5 +1,5 @@
 const srcs = [
-    "menu.png",
+    //"menu.png",
     "edit.png",
     "tick.png",
     "gallery.png", 
@@ -7,14 +7,14 @@ const srcs = [
     "recharge icon (512x512).png", 
     "rescan.png",
     "flashlight on.png",
-    "flashlight off.png",
-    "safaricom.png",
+    "flashlight off.png"
+    /*"safaricom.png",
     "airtel.png",
-    "telkom.png"
+    "telkom.png"*/
 ];
 
 const imageProps = [
-    "--menu-icon", 
+    //"--menu-icon", 
     "--edit-icon", 
     "--tick-icon", 
     "--gallery-icon", 
@@ -22,10 +22,10 @@ const imageProps = [
     "--recharge-icon", 
     "--rescan-icon", 
     "--flashlight-on-icon",
-    "--flashlight-off-icon",
-    "--safaricom-icon", 
+    "--flashlight-off-icon"
+    /*"--safaricom-icon", 
     "--airtel-icon", 
-    "--telkom-icon"
+    "--telkom-icon"*/
 ] 
 
 load();
