@@ -28,7 +28,7 @@ const imageProps = [
     "--telkom-icon"
 ] 
 
-//load();
+load();
 
 async function load (i = 0) {
     let src = srcs[i];
@@ -41,8 +41,8 @@ async function load (i = 0) {
             
             if(i < srcs.length-1)
                 load(i+1);
-            else
-                LoadingDone();
+            /*else
+                LoadingDone();*/
         } 
         else {
             console.log(response);
