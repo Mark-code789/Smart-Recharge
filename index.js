@@ -503,6 +503,7 @@ class Stream {
     } 
     static recognize = async (img, importWindow, retake) => {
     	try {
+    		await this.worker.terminate();
 	        let res = await this.worker.recognize(img);
 	        let texts = res.data.text.split("\n");
 	        let text = "";
