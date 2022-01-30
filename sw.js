@@ -66,7 +66,7 @@ self.addEventListener("message", (e) => {
 			if(e.data && e.data.type == "get-version") 
 				clients[0].postMessage({
 					type: 'version', 
-					version: 282
+					version: 283
 				});
 		} 
 	});
