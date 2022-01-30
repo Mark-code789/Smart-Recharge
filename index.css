@@ -83,20 +83,20 @@
 } 
 
 .show_install_prompt {
-    animation: pop-in 2s ease-out 0s 1 normal forwards;
+    animation: pop-in-prompt 0.5s ease-out 0s 1 normal forwards;
 } 
 
-@keyframes pop-in {
+@keyframes pop-in-prompt {
     0% {transform: translate3d(-50%, -50%, 0) scale(0);}
     80% {transform: translate3d(-50%, -50%, 0) scale(1.2);}
     100% {transform: translate3d(-50%, -50%, 0) scale(1);}
 } 
 
 .hide_install_prompt {
-    animation: pop-out 0.5s ease-in 0s 1 normal forwards;
+    animation: pop-out-prompt 0.5s ease-in 0s 1 normal forwards;
 } 
 
-@keyframes pop-out {
+@keyframes pop-out-prompt {
     0% {transform: translate3d(-50%, -50%, 0) scale(1);}
     20% {transform: translate3d(-50%, -50%, 0) scale(1.2);}
     100% {transform: translate3d(-50%, -50%, 0) scale(0);}
