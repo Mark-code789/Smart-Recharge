@@ -341,9 +341,16 @@ body {
             		} 
             	} 
                 window.addEventListener("beforeinstallprompt", (e) => {
-                	alert("there is event.");
                     e.preventDefault();
-                    deferredEvent = e;
+                    if(deferredEvent == "passed") {
+                    	setTimeout(() => {
+				            $(".install_prompt").style.display = "block";
+				            $(".install_prompt").classList.add("show_install_prompt");
+				        }, 500);
+					} 
+                    else {
+						deferredEvent = e;
+					}
                 });
                 let head = document.head;
                 let SheetLink = $$$("link");
