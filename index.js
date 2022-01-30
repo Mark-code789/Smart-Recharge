@@ -105,7 +105,6 @@ async function LoadingDone() {
     Stream.laser = $(".laser");
     Stream.canvas = $$$("canvas");
     CONSTRAINTS.video.height.exact = parseInt(_$($(".scan"), "grid-template-rows").split(" ")[1]);
-    alert(CONSTRAINTS.video.height.exact);
     
     if('contacts' in navigator && navigator.contacts.select) {
         $(".contact_picker").classList.remove("disable", "enable");
