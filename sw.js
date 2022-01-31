@@ -1,4 +1,4 @@
-let cacheName = "Smart-Recharge";
+let cacheName = "Smart-RechargeV287";
 let appShellFiles = [
     "menu.png",
     "edit.png",
@@ -36,10 +36,12 @@ self.addEventListener("fetch", (e) => {
                         cache.put(e.request, res2.clone());
                         return res2;
                     })
-                })
+                }).catch((error) => {
+                	return res1;
+                });
              }
              else {
-             	return res1
+             	return res1;
              } 
         })
     )
@@ -66,7 +68,7 @@ self.addEventListener("message", (e) => {
 			if(e.data && e.data.type == "get-version") 
 				clients[0].postMessage({
 					type: 'version', 
-					version: 283
+					version: 287
 				});
 		} 
 	});
