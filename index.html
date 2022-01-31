@@ -398,7 +398,7 @@ body {
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
-                	navigator.serviceWorker.onmessage = function(e) {
+                	/*navigator.serviceWorker.onmessage = function(e) {
 						if(e.data && e.data.type == "version") {
 							alert(e.data.version);
 							if(e.data.version < 288) {
@@ -426,7 +426,13 @@ body {
 	               		 	pageComplete();
 	              		  });
 	                	} 
-					});
+					});*/
+					
+					navigator.serviceWorker.register("sw.js" + scriptVersion).then(res => {
+            			pageComplete();
+           	 	}).catch(error => {
+           		 	pageComplete();
+          		  });
                 } 
                 else {
                 	alert("Can't Register an cache of this app because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. Another browser, preferably chrome.");
