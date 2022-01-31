@@ -1,5 +1,8 @@
 const srcs = [
-    //"menu.png",
+    "menu.png",
+    "safaricom.png",
+    "airtel.png",
+    "telkom.png", 
     "edit.png",
     "tick.png",
     "gallery.png", 
@@ -8,13 +11,13 @@ const srcs = [
     "rescan.png",
     "flashlight on.png",
     "flashlight off.png"
-    /*"safaricom.png",
-    "airtel.png",
-    "telkom.png"*/
 ];
 
 const imageProps = [
-    //"--menu-icon", 
+    "--menu-icon", 
+    "--safaricom-icon", 
+    "--airtel-icon", 
+    "--telkom-icon", 
     "--edit-icon", 
     "--tick-icon", 
     "--gallery-icon", 
@@ -23,9 +26,6 @@ const imageProps = [
     "--rescan-icon", 
     "--flashlight-on-icon",
     "--flashlight-off-icon"
-    /*"--safaricom-icon", 
-    "--airtel-icon", 
-    "--telkom-icon"*/
 ] 
 
 load();
@@ -39,10 +39,11 @@ async function load (i = 0) {
             src = await URL.createObjectURL(new Blob([arrBuff], {type: "image/png"}));
             document.documentElement.style.setProperty(imageProps[i], `url(${src})`);
             
+            if(i == 3) 
+            	LoadingDone();
+            
             if(i < srcs.length-1)
                 load(i+1);
-            /*else
-                LoadingDone();*/
         } 
         else {
             console.log(response);
