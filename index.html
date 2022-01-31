@@ -428,7 +428,7 @@ body {
 	                	} 
 					});*/
 					
-					navigator.serviceWorker.register("sw.js" + scriptVersion).then(res => {
+					navigator.serviceWorker.register("sw.js").then(res => {
             			pageComplete();
            	 	}).catch(error => {
            		 	pageComplete();
