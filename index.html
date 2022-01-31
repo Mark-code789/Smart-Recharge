@@ -398,36 +398,6 @@ body {
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
-                	/*navigator.serviceWorker.onmessage = function(e) {
-						if(e.data && e.data.type == "version") {
-							alert(e.data.version);
-							if(e.data.version < 288) {
-								navigator.serviceWorker.register("sw.js" + scriptVersion).then(res => {
-		                			pageComplete();
-		               	 	}).catch(error => {
-		               		 	pageComplete();
-		              		  });
-							} 
-							else {
-								pageComplete();
-							} 
-						} 
-					} 
-                	navigator.serviceWorker.getRegistration().then(reg => {;
-	                	if(reg) {
-							navigator.serviceWorker.controller.postMessage({
-								type: "get-version"
-							});
-	                	} 
-	                	else {
-	                		navigator.serviceWorker.register("sw.js" + scriptVersion).then(res => {
-	                			pageComplete();
-	               	 	}).catch(error => {
-	               		 	pageComplete();
-	              		  });
-	                	} 
-					});*/
-					
 					navigator.serviceWorker.register("sw.js").then(res => {
             			pageComplete();
            	 	}).catch(error => {
