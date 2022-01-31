@@ -40,7 +40,7 @@ async function load (i = 0) {
             document.documentElement.style.setProperty(imageProps[i], `url(${src})`);
             
             if(i == 3) 
-            	LoadingDone();
+            	setTimeout(LoadingDone, 500);
             
             if(i < srcs.length-1)
                 load(i+1);
