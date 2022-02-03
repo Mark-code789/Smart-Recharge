@@ -329,8 +329,6 @@ body {
             } 
             var scriptVersion = 2812;
             var deferredEvent;
-            var tesseractLoaded = false;
-            var rechargeLoaded = false;
 			var storage = null;
 			try {
 			    storage = localStorage;
@@ -366,13 +364,9 @@ body {
             } 
             
             function scriptLoaded (type) {
-                if(type == "tesseract")
-                    tesseractLoaded = true;
-                else
-                    rechargeLoaded = true;
+                if(type == "recharge")
+                	load();
                 
-                //if(tesseractLoaded && rechargeLoaded) 
-                	//LoadingDone();
                 alert(type);
             } 
             
