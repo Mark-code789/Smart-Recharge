@@ -1,16 +1,16 @@
 :root {
-    --menu-icon: /*linear-gradient(#000, #0099B1);*/ url("menu.png");
-    --edit-icon: /*linear-gradient(#000, #0099B1);*/ url("edit.png");
-    --tick-icon: /*linear-gradient(#000, #0099B1);*/ url("tick.png");
-    --gallery-icon: /*linear-gradient(#000, #0099B1);*/ url("gallery.png");
-    --contact-icon: /*linear-gradient(#000, #0099B1);*/ url("contact.png");
-    --recharge-icon: /*linear-gradient(#000, #0099B1);*/ url("recharge icon (512x512).png");
-    --rescan-icon: /*linear-gradient(#000, #0099B1);*/ url("rescan.png");
-    --flashlight-on-icon: /*linear-gradient(#000, #0099B1);*/ url("flashlight on.png");
-    --flashlight-off-icon: /*linear-gradient(#000, #0099B1);*/ url("flashlight off.png");
-    --safaricom-icon: /*linear-gradient(#000, #0099B1);*/ url("safaricom.png");
-    --airtel-icon: /*linear-gradient(#000, #0099B1);*/ url("airtel.png");
-    --telkom-icon: /*linear-gradient(#000, #0099B1);*/ url("telkom.png");
+    --menu-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/menu.png");
+    --edit-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/edit.png");
+    --tick-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/tick.png");
+    --gallery-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/gallery.png");
+    --contact-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/contact.png");
+    --recharge-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/recharge icon (512x512).png");
+    --rescan-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/rescan.png");
+    --flashlight-on-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/flashlight on.png");
+    --flashlight-off-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/flashlight off.png");
+    --safaricom-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/safaricom.png");
+    --airtel-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/airtel.png");
+    --telkom-icon: /*linear-gradient(#000, #0099B1);*/ url("./src/Images/telkom.png");
     --sim-height: 150px;
 } 
 
