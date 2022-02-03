@@ -36,7 +36,7 @@ async function load (i = 0) {
         if(arrBuff.byteLength > 0) {
             src = await URL.createObjectURL(new Blob([arrBuff], {type: "image/png"}));
             document.documentElement.style.setProperty(imageProps[i], `url(${src})`);
-            
+            alert(src);
             if(i == 3) 
             	setTimeout(LoadingDone, 500);
             
