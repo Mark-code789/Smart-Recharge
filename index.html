@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0">
         <meta name="theme-color" content="#0099B1">
         <link rel="manifest" href="./manifest.webmanifest">
-        <link rel="icon" href="./recharge icon.ico" type="image/x-icon">
-        <link rel="icon" href="./recharge icon (16x16).png" type="image/png" sizes="16x16">
-        <link rel="icon" href="./recharge icon (32x32).png" type="image/png" sizes="32x32">
-        <link rel="icon" href="./recharge icon (96x96).png" type="image/png" sizes="96x96">
+        <link rel="icon" href="./src/Images/recharge icon.ico" type="image/x-icon">
+        <link rel="icon" href="./src/Images/recharge icon (16x16).png" type="image/png" sizes="16x16">
+        <link rel="icon" href="./src/Images/recharge icon (32x32).png" type="image/png" sizes="32x32">
+        <link rel="icon" href="./src/Images/recharge icon (96x96).png" type="image/png" sizes="96x96">
         <title>SMART RECHARGE</title>
         <style>
 *, *:before, *:after {
@@ -83,7 +83,7 @@ body {
     grid-area: 1 / 1 / span 2 / 2;
     height: 45px;
     width: 100%;
-    background: url("recharge icon (512x512).png");
+    background: url("./src/Images/recharge icon (512x512).png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -364,10 +364,11 @@ body {
             } 
             
             function scriptLoaded (type) {
-                if(type == "recharge")
-                	load();
-                
-                alert(type);
+                if(type == "recharge") {
+                	try {
+                		load();
+                	} catch (error) {reportError(error)}
+                } 
             } 
             
             window.addEventListener("beforeinstallprompt", (e) => {
