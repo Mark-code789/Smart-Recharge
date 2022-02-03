@@ -1,4 +1,4 @@
-let cacheName = "Smart-RechargeV2813";
+let cacheName = "Smart-RechargeV2817";
 let appShellFiles = [
     "./src/Images/menu.png",
     "./src/Images/edit.png",
