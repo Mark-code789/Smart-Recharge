@@ -29,7 +29,7 @@ const imageProps = [
 ] 
 
 load();
-
+alert("Loading");
 async function load (i = 0) {
     let src = srcs[i];
     let response = await fetch(src);
