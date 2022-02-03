@@ -34,7 +34,6 @@ async function load (i = 0) {
     if(response.status == 200) {
         let arrBuff = await response.arrayBuffer();
         if(arrBuff.byteLength > 0) {
-        	alert(src);
             src = await URL.createObjectURL(new Blob([arrBuff], {type: "image/png"}));
             document.documentElement.style.setProperty(imageProps[i], `url(${src})`);
             if(i == 3) 
