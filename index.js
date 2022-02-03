@@ -29,7 +29,7 @@ const imageProps = [
 ];
 
 async function load (i = 0) {
-    let src = srcs[i];
+    let src = "./src/Images/" + srcs[i];
     let response = await fetch(src);
     if(response.status == 200) {
         let arrBuff = await response.arrayBuffer();
