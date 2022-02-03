@@ -26,9 +26,7 @@ const imageProps = [
     "--rescan-icon", 
     "--flashlight-on-icon",
     "--flashlight-off-icon"
-] 
-
-load();
+];
 
 async function load (i = 0) {
     let src = srcs[i];
