@@ -56,7 +56,7 @@ async function load (i = 0) {
 async function LoadingDone() {
 	Stream.initTesseract();
 	if(storage) {
-		let theme = storage.getItem("theme");
+		let theme = storage.getItem("SR-theme");
 		if(theme && JSON.parse(theme)) {
 			Options.darkTheme();
 		} 
@@ -142,7 +142,7 @@ class Options {
 		$(".recharged").classList.toggle("dark_theme");
 		let theme = JSON.stringify($(".toggle").classList.contains("toggle_switch"));
 		if(storage) {
-			storage.setItem("theme",  theme);
+			storage.setItem("SR-theme",  theme);
 		} 
 	} 
     static share = () => {
