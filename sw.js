@@ -1,4 +1,4 @@
-let version = "4";
+let version = "5";
 let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
@@ -39,7 +39,7 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("fetch", (e) => {
     e.respondWith(
-        caches.match(e.request, {ignoreSearch: true}).then((res1) => {
+        caches.match(e.request, {ignoreSearch: true}).then((res) => {
             if(res) {
             	return res;
             }
