@@ -126,7 +126,7 @@ body {
             <div class="head">
                 <div class="icon"></div>
                 <h2>Smart Recharge</h2>
-                <h3>Version info: V2.8 18</h3>
+                <h3>Version info:</h3>
                 <p>Install Smart Recharge in your phone</p>
             </div>
             <div class="foot">
@@ -139,7 +139,7 @@ body {
             <div class="load_footer">
                 <div class="load_icon"></div>
                 <h2>Smart Recharge</h2>
-                <h3>Version info: V2.8 18</h3>
+                <h3>Version info:</h3>
             </div>
             <div class="spinner"></div>
         </article>
@@ -327,7 +327,7 @@ body {
             function $$$(type) {
                 return document.createElement(type);
             } 
-            var scriptVersion = 2818;
+            var version = "2.1.1.1;
             var deferredEvent;
 			var storage = null;
 			try {
@@ -341,6 +341,12 @@ body {
             			$(".load").classList.toggle("dark_theme");
             		} 
             	} 
+            	
+            	$(".install_prompt .head h3").textContent = "Version Info: V" + version;
+            	$(".load .load_footer h3").textContent = "Version Info: V" + version;
+            	$(".about_window .head h3").textContent = "Version Info: V" + version;
+            	
+            
                 let head = document.head;
                 let SheetLink = $$$("link");
                 let JsLink0 = $$$("script");
@@ -348,12 +354,12 @@ body {
                 
                 SheetLink.type = "text/css";
                 SheetLink.rel = "stylesheet";
-                SheetLink.href = "index.css?v=" + scriptVersion;
+                SheetLink.href = "index.css";
                 
                 JsLink0.onload = () => {
                     scriptLoaded("recharge");
                 };
-                JsLink0.src = "index.js?v=" + scriptVersion;
+                JsLink0.src = "index.js";
                 JsLink1.onload = () => {
                     scriptLoaded("tesseract");
                 };
@@ -388,19 +394,62 @@ body {
 					deferredEvent = e;
 				}
             });
+            
+            const InvokeSWUpdateFlow = async (reg) => {
+				let refresh = await confirm("APP UPDATE\nVersion: " + version + "\n\nNew version of Checkers available.\n\n What's New?\n\n\t- Improved internal operations.\n\t- Fixed offline loading problems.\n\nDo you want to update?");
+				if(refresh) {
+					await reg.waiting.postMessage({type: "skip-waiting"});
+				} 
+			} 
+			
+			const FinishInstalling = async (reg) => {
+				if(reg.waiting) {
+					if(navigator.serviceWorker.controller) {
+						await InvokeSWUpdateFlow(reg);
+					} 
+					else {
+						console.log("Service initialized for the first time");
+					} 
+				} 
+				else if(reg.active && !navigator.serviceWorker.controller) {
+					location.reload();
+				} 
+			} 
 			
 			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
                 if("serviceWorker" in navigator) {
-					navigator.serviceWorker.register("sw.js").then(res => {
-            			pageComplete();
-           	 	}).catch(error => {
-           		 	pageComplete();
-          		  });
-                } 
-                else {
-                	alert("Can't Register an cache of this app because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. Another browser, preferably chrome.");
-                    window.onload = pageComplete();
-                } 
+                	window.onload = async () => {
+						const reg = await navigator.serviceWorker.register("./sw.js");
+						reg.update();
+						if(reg.waiting) {
+							await InvokeSWUpdate(reg);
+						} 
+							
+						reg.addEventListener("updatefound", async () => {
+							if(reg.installing) {
+								reg.installing.addEventListener("statechange", () => {
+									FinishInstalling(reg);
+								});
+							} 
+						});
+						
+						let refreshing = false;
+						navigator.serviceWorker.addEventListener("controllerchange", (e) => {
+							if(!refreshing) {
+								location.reload();
+								refreshing = true;
+							} 
+						});
+						
+						if(reg.active) {
+							pageComplete();
+						} 
+					} 
+				} 
+				else {
+	            	alert("OFFLINE REGISTRATION FAILURE\n\nCan't Register an offline version of this game because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. try another browser, preferably chrome.");
+	                pageComplete();
+	            } 
            } 
            else {
                alert("This app is not compatible with your current browser. Try another browser preferably chrome.");
