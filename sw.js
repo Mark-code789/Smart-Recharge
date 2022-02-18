@@ -1,4 +1,4 @@
-let version = "6";
+let version = "7";
 let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
@@ -26,6 +26,8 @@ let appShellFiles = [
     "./index.html",
     "./manifest.webmanifest",
     "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js", 
+    "https://unpkg.com/tesseract.js@v2.1.0/dist/worker.min.js", 
+    "https://unpkg.com/tesseract.js-core@v2.2.0/dist/tesseract-core.wasm.js", 
     "./"
 ];
 
