@@ -1,4 +1,4 @@
-let version = "13";
+let version = "14";
 let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
@@ -50,11 +50,6 @@ self.addEventListener("fetch", (e) => {
             } 
             
             return fetch(e.request).then((res2) => {
-            	console.log("Status: ", res2.status);
-            	if(!res2 || res2.status != 200) {
-            		return res2;
-            	} 
-            	
                 return caches.open(cacheName).then((cache) => {
                     cache.put(e.request, res2.clone());
                     console.log("cached: ", e.request.url);
