@@ -416,8 +416,8 @@ body {
 				} 
 			} 
 			
-			if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
-				window.addEventListener("load", async () => {
+			window.addEventListener("load", async () => {
+				if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
 	                if("serviceWorker" in navigator) {
 						const reg = await navigator.serviceWorker.register("./sw.js");
 						//reg.update();
@@ -448,13 +448,13 @@ body {
 					else {
 		            	alert("OFFLINE REGISTRATION FAILURE\n\nCan't Register an offline version of this game because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. try another browser, preferably chrome.");
 		                pageComplete();
-		            } 
-				});
-           } 
-           else {
-               alert("This app is not compatible with your current browser. Try another browser preferably chrome.");
-               window.close();
-           } 
+		            }
+				} 
+				else {
+					alert("This app is not compatible with your current browser. Try another browser preferably chrome.");
+					window.close();
+				} 
+			});
         </script>
     </body>
 </html>
