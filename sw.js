@@ -1,4 +1,4 @@
-let version = "2";
+let version = "3";
 let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
@@ -80,4 +80,10 @@ self.addEventListener("activate", (e) => {
             }))
         })
     )
+});
+
+self.addEventListener("message", (e) => {
+	if(e.data && e.data.type == "skip-waiting") {
+		self.skipWaiting();
+	} 
 });
