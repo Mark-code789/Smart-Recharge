@@ -6,7 +6,6 @@ let appShellFiles = [
     "./src/Images/tick.png",
     "./src/Images/gallery.png",
     "./src/Images/contact.png",
-    "./src/Images/recharge icon (512x512).png", 
     "./src/Images/rescan.png",
     "./src/Images/flashlight on.png",
     "./src/Images/flashlight off.png",
