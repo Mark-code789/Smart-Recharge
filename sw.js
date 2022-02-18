@@ -1,4 +1,5 @@
-let cacheName = "Smart-RechargeV2817";
+let version = "1";
+let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
     "./src/Images/edit.png",
@@ -12,10 +13,21 @@ let appShellFiles = [
     "./src/Images/safaricom.png",
     "./src/Images/airtel.png",
     "./src/Images/telkom.png", 
+    "./src/Images/recharge icon (16x16).png", 
+    "./src/Images/recharge icon (32x32).png", 
+    "./src/Images/recharge icon (48x48).png", 
+    "./src/Images/recharge icon (96x96).png", 
+    "./src/Images/recharge icon (144x144).png", 
+    "./src/Images/recharge icon (192x192).png", 
+    "./src/Images/recharge icon (256x256).png", 
+    "./src/Images/recharge icon (512x512).png", 
+    "./src/Images/recharge icon.ico", 
+    "./index.js",
+    "./index.css",
+    "./index.html",
+    "./manifest.webmanifest",
     "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js", 
-    "index.js",
-    "index.css",
-    "index.html"
+    "./"
 ];
 
 self.addEventListener("install", (e) => {
@@ -29,19 +41,29 @@ self.addEventListener("install", (e) => {
 self.addEventListener("fetch", (e) => {
     e.respondWith(
         caches.match(e.request, {ignoreSearch: true}).then((res1) => {
-            if(navigator.onLine && /(?<!min).(html|css|js)(.*?)$/g.test(e.request.url) || !res1) {
-                return fetch(e.request).then((res2) => {
-                    return caches.open(cacheName).then((cache) => {
-                        cache.put(e.request, res2.clone());
-                        return res2;
-                    })
+            if(res) {
+            	return res;
+            }
+            else {
+            	console.log(e.request.url);
+            } 
+            
+            return fetch(e.request).then((res2) => {
+            	if(!res2 || res2.status != 200) {
+            		return res2;
+            	} 
+            	
+                return caches.open(cacheName).then((cache) => {
+                    cache.put(e.request, res2.clone());
+                    return res2;
                 }).catch((error) => {
-                	return res1;
-                });
-             }
-             else {
-             	return res1;
-             } 
+					console.log("Put Error", error);
+					return res2;
+				});
+            }).catch((error) => {
+            	console.log("Fetch Error", error);
+            	return res;
+            });
         })
     )
 });
@@ -58,17 +80,4 @@ self.addEventListener("activate", (e) => {
             }))
         })
     )
-});
-
-self.addEventListener("message", (e) => {
-	self.clients.matchAll({includeUncontrolled: true, type: 'window'}).
-	then((clients) => {
-		if(clients && clients.length) {
-			if(e.data && e.data.type == "get-version") 
-				clients[0].postMessage({
-					type: 'version', 
-					version: 288
-				});
-		} 
-	});
 });
