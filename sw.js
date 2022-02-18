@@ -54,6 +54,7 @@ self.addEventListener("fetch", (e) => {
             	
                 return caches.open(cacheName).then((cache) => {
                     cache.put(e.request, res2.clone());
+                    console.log("cached");
                     return res2;
                 }).catch((error) => {
 					console.log("Put Error", error);
