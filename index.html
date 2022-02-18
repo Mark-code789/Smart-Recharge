@@ -377,7 +377,7 @@ body {
                 } 
             } 
             
-            window.addEventListener("beforeinstallprompt", (e) => {
+            /*window.addEventListener("beforeinstallprompt", (e) => {
                 e.preventDefault();
                 if(deferredEvent == "passed") {
                 	deferredEvent = e;
@@ -393,7 +393,7 @@ body {
                 else {
 					deferredEvent = e;
 				}
-            });
+            });*/
             
             const InvokeSWUpdateFlow = async (reg) => {
 				let refresh = await confirm("APP UPDATE\nVersion: " + version + "\n\nNew version of Checkers available.\n\n What's New?\n\n\t- Improved internal operations.\n\t- Fixed offline loading problems.\n\nDo you want to update?");
