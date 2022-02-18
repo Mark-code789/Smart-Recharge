@@ -1,7 +1,7 @@
 {
     "short_name": "Smart Recharge",
     "name": "Smart Recharge",
-    "description": "Standalone Frontend Smart Recharge App.",
+    "description": "Standalone Frontend Recharge App.",
     "icons": [
         {
             "src": "./src/Images/recharge icon (48x48).png",
