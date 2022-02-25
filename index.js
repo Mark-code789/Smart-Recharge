@@ -102,7 +102,8 @@ async function LoadingDone() {
     Stream.video = $("video");
     Stream.laser = $(".laser");
     Stream.canvas = $$$("canvas");
-    CONSTRAINTS.video.height.exact = parseInt(_$($(".scan"), "grid-template-rows").split(" ")[1]);
+    CONSTRAINTS.video.height.ideal = parseInt(_$($(".scan"), "grid-template-columns").split(" ")[0]);
+    CONSTRAINTS.video.width.ideal = parseInt(_$($(".scan"), "grid-template-rows").split(" ")[1]);
     
     if('contacts' in navigator && navigator.contacts.select) {
         $(".contact_picker").classList.remove("disable", "enable");
@@ -123,7 +124,15 @@ async function LoadingDone() {
 } 
 
 function reportError(error) {
+	console.log(error);
 	alert(error);
+} 
+
+const End = (event) => {
+    if(event.animationName === "pop-out") {
+        let popUpNote = $("#pop-up-note");
+        popUpNote.style.display = "none";
+    } 
 } 
 
 const About = () => {
@@ -418,10 +427,10 @@ const SIM = {
 const CONSTRAINTS = {
     video: {
         width: {
-            exact: window.innerWidth
+            max: window.innerHeight
         }, 
         height: {
-            exact: window.innerHeight
+            max: window.innerWidth
         },
         facingMode: 'environment', 
         focusMode: 'continuous'
@@ -496,12 +505,11 @@ class Stream {
 	        let width = parseInt(_$(scannerFrame, "width"));
 	        let height = parseInt(_$(scannerFrame, "height"));
 	        let left = _$$(scannerFrame, scannerFrame.parentNode).left;
-	        let top = _$$(scannerFrame, scannerFrame.parentNode).top
+	        let top = _$$(scannerFrame, scannerFrame.parentNode).top;
 	        this.canvas.width = width;
 	        this.canvas.height = height;
 	        let ctx = this.canvas.getContext("2d");
 	        ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
-	        ctx.filter = "invert(1)";
 	        this.snapshot = this.canvas.toDataURL("image/png");
 	        await this.recognize(this.snapshot);
 		} catch (error) {
@@ -566,7 +574,7 @@ class Stream {
 	        else {
 	            if(importWindow) {
 	                if(retake) {
-	                    alert("Please ensure you crop the image to only expose the digital code.");
+	                    Notify("Please ensure you crop the image to only expose the digital code.");
 	                    $(".crop .footer button").classList.remove("disable", "enable");
 	                    $(".crop .footer button").classList.add("enable");
 	                } else {
