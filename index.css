@@ -539,12 +539,12 @@ video {
 
 .scanner_frame {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(calc(100% - 60px) / 2);
+    left: calc(calc(100% - 250px) / 2);
+    /*transform: translate(-50%, -50%);*/
     height: 60px;
     width: 250px;
-    box-shadow: 0 0 0 1000vmax rgba(0,0,0,0.7);
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.7);
     background: transparent;
     overflow: visible;
 } 
