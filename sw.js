@@ -1,4 +1,4 @@
-let version = "17";
+let version = "18";
 let cacheName = "Smart-Recharge-v:" + version;
 let appShellFiles = [
     "./src/Images/menu.png",
