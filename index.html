@@ -2,124 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0">
-        <meta name="theme-color" content="#0099B1">
+        <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0">
+        <meta name="theme-color" content="#003673">
         <link rel="manifest" href="./manifest.webmanifest">
-        <link rel="icon" href="./src/Images/recharge icon.ico" type="image/x-icon">
-        <link rel="icon" href="./src/Images/recharge icon (16x16).png" type="image/png" sizes="16x16">
-        <link rel="icon" href="./src/Images/recharge icon (32x32).png" type="image/png" sizes="32x32">
-        <link rel="icon" href="./src/Images/recharge icon (96x96).png" type="image/png" sizes="96x96">
-        <title>SMART RECHARGE</title>
-        <style>
-*, *:before, *:after {
-    font-family: Verdana, Arial, Serif;
-    box-sizing: border-box;
-    overflow: hidden;
-    outline: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-} 
-
-html {
-    font-size: 0.9em;
-} 
-
-button {
-    font-size: 0.8rem;
-} 
-
-body {
-	height: 100vh;
-	width: 100vw;
-    margin: 0;
-    padding: 0;
-    background: #0099B1;
-}
-
-.load {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    background: #fff;
-    padding: 20px;
-    
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-} 
-
-.spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid #0099B100;
-    border-left-color: #0099B1;
-    border-right-color: #0099B1;
-    animation: spin 1s linear 0s infinite;
-} 
-
-@keyframes spin {
-    0% {transform: translate3d(-50%, -50%, 0) rotate(0deg);}
-    100% {transform: translate3d(-50%, -50%, 0) rotate(360deg);}
-} 
-
-.load .load_footer {
-    height: fit-content;
-    width: fit-content;
-    display: grid;
-    grid-template-columns: 45px auto;
-    grid-template-rows: auto auto;
-    grid-column-gap: 10px;
-    justify-content: start;
-    align-content: center;
-} 
-
-.load_icon {
-    grid-area: 1 / 1 / span 2 / 2;
-    height: 45px;
-    width: 100%;
-    background: url("./src/Images/recharge icon (512x512).png");
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-} 
-
-.load_footer > h2, .load_footer > h3 {
-    color: #0099B1;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-} 
-
-.load_footer h2 {
-    font-weight: 500;
-    font-size: 1.5rem;
-} 
-
-.load_footer h3 {
-    font-size: 0.8rem;
-    font-weight: 400;
-    padding-left: 2px;
-} 
-
-.dark_theme.load {
-	background: #003238 !important;
-} 
-
-.dark_theme.load h2, 
-.dark_theme.load h3 {
-	color: #fff !important;
-} 
-        </style>
+        <link rel="icon" href="./src/images/logo.ico" type="image/x-icon">
+        <link rel="icon" href="./src/images/logo icon (16x16).png" type="image/png" sizes="16x16">
+        <link rel="icon" href="./src/images/logo icon (32x32).png" type="image/png" sizes="32x32">
+        <link rel="icon" href="./src/images/logo icon (96x96).png" type="image/png" sizes="96x96">
+        <link rel="stylesheet" href="./index.css">
+        <script>
+        	if(/(html|smart.recharge)\/$/i.test(new URL(window.location).pathname)) {
+        		location.replace(location.href.includes("html")? location.href.replace(/\/.*$/, ""): location.href + 'index.html');
+       	 } 
+        	let url = new URL(window.location);
+        	if(url.searchParams.has("eruda"))
+				eruda.init();
+		</script>
+        <title>SMART RECHARGE - scan for digital top up code automatically. Easy and first.</title>
     </head>
     <body>
         <div class="install_prompt" hidden>
@@ -135,6 +34,19 @@ body {
             </div>
         </div>
         <section onanimationend="End(event)" id="pop-up-note" hidden></section>
+        <article id="notification-window" hidden>
+            <section id="note">
+                <div class="note_header"></div>
+                <div class="close_btn" onclick="NotificationClick(this)"></div>
+                <img class="note_img">
+                <div class="note_body"></div>
+                <section class="note_footer">
+                    <button class="note_left_btn" onclick="NotificationClick(this)"></button>
+                    <button class="note_center_btn" onclick="NotificationClick(this)"></button>
+                    <button class="note_right_btn" onclick="NotificationClick(this)"></button>
+                <section>
+            </section>
+        </article>
         <article class="load" hidden> 
             <div class="load_footer">
                 <div class="load_icon"></div>
@@ -176,15 +88,21 @@ body {
                 <h3>Version info: V2.8 18</h3>
             </div>
             <div class="options">
-            	<button>Dark Theme<span class='toggle'></span><span class="switch"></span></button>
-            	<hr>
                 <button>Share</button>
+                <hr>
+                <button>Check update</button>
+                <hr>
+                <button>Support</button>
+                <hr>
+                <button>Developer</button>
                 <hr>
                 <button>Feedback</button>
                 <hr>
-                <button>WhatsApp</button>
+                <button>Contact</button>
                 <hr>
-                <button>SoloLearn</button>
+                <button>Follow</button>
+                <hr>
+                <button>More apps</button>
             </div>
             <div class="footer">
                 <button>BACK</button>
@@ -282,179 +200,6 @@ body {
                 <button>BACK TO MENU</button>
             </div>
         </article>
-        <script>
-            'use strict' 
-            const HideInstallPrompt = () => {
-                $(".install_prompt").classList.remove("show_install_prompt");
-                $(".install_prompt").classList.add("hide_install_prompt");
-                setTimeout(() => {$(".install_prompt").style.display = "none"}, 600);
-            } 
-            const InstallApp = async () => {
-                HideInstallPrompt();
-                deferredEvent.prompt();
-                const {outcome} = await deferredEvent.userChoice;
-                deferredEvent = null;
-            } 
-            function _$(elem, property, float) {
-                if(float) 
-                    return parseFloat(window.getComputedStyle(elem, null).getPropertyValue(property));
-                return window.getComputedStyle(elem, null).getPropertyValue(property);
-            } 
-            function _$$(child, parent) {
-                child = child.getBoundingClientRect();
-                if(parent) {
-                    let childTop = child.top;
-                    let childLeft = child.left;
-                    parent = parent.getBoundingClientRect();
-                    let parentTop = parent.top;
-                    let parentLeft = parent.left;
-                    let top = childTop - parentTop;
-                    let left = childLeft - parentLeft;
-                    return {top, left, width: child.width, height: child.height};
-                } 
-                else {
-                    return child;
-                } 
-            } 
-            function $(elem) {
-                return document.querySelector(elem);
-            } 
-
-            function $$(elem) {
-                return document.querySelectorAll(elem);
-            }
-            
-            function $$$(type) {
-                return document.createElement(type);
-            } 
-            var version = "5.1.3.18";
-            var deferredEvent;
-			var storage = null;
-			try {
-			    storage = localStorage;
-			} catch (error) {}
-            
-            function pageComplete () {
-            	if(storage) {
-            		let theme = storage.getItem("SR-theme");
-            		if(theme && JSON.parse(theme)) {
-            			$(".load").classList.toggle("dark_theme");
-            		} 
-            	} 
-            	
-            	$(".install_prompt .head h3").textContent = "Version Info: V" + version;
-            	$(".load .load_footer h3").textContent = "Version Info: V" + version;
-            	$(".about_window .head h3").textContent = "Version Info: V" + version;
-            	
-            
-                let head = document.head;
-                let SheetLink = $$$("link");
-                let JsLink0 = $$$("script");
-                let JsLink1 = $$$("script");
-                
-                SheetLink.type = "text/css";
-                SheetLink.rel = "stylesheet";
-                SheetLink.href = "index.css";
-                
-                JsLink0.onload = () => {
-                    scriptLoaded("recharge");
-                };
-                JsLink0.src = "index.js";
-                JsLink1.onload = () => {
-                    scriptLoaded("tesseract");
-                };
-                JsLink1.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
-                head.appendChild(JsLink0);
-                head.appendChild(JsLink1);
-                head.appendChild(SheetLink);
-            } 
-            
-            function scriptLoaded (type) {
-                if(type == "recharge") {
-                	try {
-                		load();
-                	} catch (error) {reportError(error)}
-                } 
-            } 
-            
-            window.addEventListener("beforeinstallprompt", (e) => {
-                e.preventDefault();
-                if(deferredEvent == "passed") {
-                	deferredEvent = e;
-                	try {
-                		setTimeout(() => {
-				            $(".install_prompt").style.display = "block";
-				            $(".install_prompt").classList.add("show_install_prompt");
-						}, 1);
-					} catch (error) {
-						reportError(error);
-					} 
-				} 
-                else {
-					deferredEvent = e;
-				}
-            });
-            
-            const InvokeSWUpdateFlow = async (reg) => {
-				let refresh = await confirm("APP UPDATE\nVersion: " + version + "\n\nNew version of Smart-Recharge available.\n\n What's New?\n\n\t- Improved scanning speed.\n\t- Fixed minor scanning problems.\n\nDo you want to update?");
-				if(refresh) {
-					await reg.waiting.postMessage({type: "skip-waiting"});
-				} 
-			} 
-			
-			const FinishInstalling = async (reg) => {
-				if(reg.waiting) {
-					if(navigator.serviceWorker.controller) {
-						await InvokeSWUpdateFlow(reg);
-					} 
-					else {
-						console.log("Service initialized for the first time");
-					} 
-				} 
-				else if(reg.active && !navigator.serviceWorker.controller) {
-					location.reload();
-				} 
-			} 
-			
-			window.addEventListener("load", async () => {
-				if("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
-	                if("serviceWorker" in navigator) {
-						const reg = await navigator.serviceWorker.register("./sw.js");
-						reg.update();
-						if(reg.waiting) {
-							await InvokeSWUpdate(reg);
-						} 
-							
-						reg.addEventListener("updatefound", async () => {
-							if(reg.installing) {
-								reg.installing.addEventListener("statechange", () => {
-									FinishInstalling(reg);
-								});
-							} 
-						});
-						
-						let refreshing = false;
-						navigator.serviceWorker.addEventListener("controllerchange", (e) => {
-							if(!refreshing) {
-								location.reload();
-								refreshing = true;
-							} 
-						});
-						
-						if(reg.active) {
-							pageComplete();
-						} 
-					} 
-					else {
-		            	alert("OFFLINE REGISTRATION FAILURE\n\nCan't Register an offline version of this app because your browser don't support this capability. However you can still access it only while online. If you however really need the offline version, try: \n\n1. Update your browser. or\n2. try another browser, preferably chrome.");
-		                pageComplete();
-		            }
-				} 
-				else {
-					alert("This app is not compatible with your current browser. Try another browser preferably chrome.");
-					window.close();
-				} 
-			});
-        </script>
+        <script src="./index.js"></script>
     </body>
 </html>

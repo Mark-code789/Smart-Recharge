@@ -1,32 +1,36 @@
 let version = "18";
 let cacheName = "Smart-Recharge-v:" + version;
+let sharedData = {};
 let appShellFiles = [
-    "./src/Images/menu.png",
-    "./src/Images/edit.png",
-    "./src/Images/tick.png",
-    "./src/Images/gallery.png",
-    "./src/Images/contact.png",
-    "./src/Images/rescan.png",
-    "./src/Images/flashlight on.png",
-    "./src/Images/flashlight off.png",
-    "./src/Images/safaricom.png",
-    "./src/Images/airtel.png",
-    "./src/Images/telkom.png", 
-    "./src/Images/recharge icon (16x16).png", 
-    "./src/Images/recharge icon (32x32).png", 
-    "./src/Images/recharge icon (48x48).png", 
-    "./src/Images/recharge icon (96x96).png", 
-    "./src/Images/recharge icon (144x144).png", 
-    "./src/Images/recharge icon (192x192).png", 
-    "./src/Images/recharge icon (256x256).png", 
-    "./src/Images/recharge icon (512x512).png", 
-    "./src/Images/recharge icon.ico", 
+    "./src/images/menu.png",
+    "./src/images/edit.png",
+    "./src/images/tick.png",
+    "./src/images/gallery.png",
+    "./src/images/contact.png",
+    "./src/images/rescan.png",
+    "./src/images/flashlight on.png",
+    "./src/images/flashlight off.png",
+    "./src/images/safaricom.png",
+    "./src/images/airtel.png",
+    "./src/images/telkom.png", 
+    "./src/images/cancel.png", 
+    "./src/images/logo icon (16x16).png", 
+    "./src/images/logo icon (32x32).png", 
+    "./src/images/logo icon (48x48).png", 
+    "./src/images/logo icon (96x96).png", 
+    "./src/images/logo icon (144x144).png", 
+    "./src/images/logo icon (192x192).png", 
+    "./src/images/logo icon (256x256).png", 
+    "./src/images/logo.png", 
+    "./src/images/logo.ico", 
+    "./src/app.js",
+	"./src/app.css", 
+    "./eruda/eruda.min.js", 
+    "./tesseract/tesseract.js", 
     "./index.js",
     "./index.css",
     "./index.html",
-    "./manifest.webmanifest",
-    "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js", 
-    "./"
+    "./manifest.webmanifest", 
 ];
 
 self.addEventListener("install", (e) => {
@@ -38,29 +42,43 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
+	let url = new URL(e.request.url);
+	if(e.request.method == "POST" && url.searchParams.has("share-target")) {
+		e.respondWith(Response.redirect('./index.html'));
+		e.waitUntil(async function () { 
+			try {
+				let data = await e.request.formData();
+				let link = data.get("link") || "";
+				let image = data.get("img") || "";
+				sharedData = {image, link};
+			} catch (error) {
+				sharedData = {error}
+			} 
+		}());
+		return;
+		
+	} 
     e.respondWith(
-        caches.match(e.request, {ignoreSearch: true}).then((res) => {
-            if(res) {
+        caches.match(e.request.url.split("?")[0].replace(/html\/.*$/i, 'html').replace(/smart.recharge\/$/i, (t) => t + "index.html"), {cacheName, ignoreSearch: true}).then( async (res) => {
+			if(res && !/(html|css|js|webmanifest).*$/gi.test(e.request.url)) {
             	return res;
             }
-            else {
-            	console.log(e.request.url);
-            } 
             
             return fetch(e.request).then((res2) => {
+            	if(res2.status != 200) {
+	            	return res || res2;
+            	} 
+            	
                 return caches.open(cacheName).then((cache) => {
-                    cache.put(e.request, res2.clone());
-                    console.log("cached: ", e.request.url);
+                    cache.put(e.request.url.split("?")[0], res2.clone());
                     return res2;
                 }).catch((error) => {
-					console.log("Put Error", error);
 					return res2;
 				});
             }).catch((error) => {
-            	console.log("Fetch Error", error);
-            	return res;
+            	return res || new Response(null, {"status": 200});
             });
-        })
+		})
     )
 });
 
@@ -78,8 +96,18 @@ self.addEventListener("activate", (e) => {
     )
 });
 
-self.addEventListener("message", (e) => {
+self.addEventListener("message", async (e) => {
 	if(e.data && e.data.type == "skip-waiting") {
 		self.skipWaiting();
+	} 
+	else if(e.data && e.data.type == "ready") {
+		let clients = await self.clients.matchAll({type: "window"});
+		for(let client of clients) {
+			if(sharedData.link != undefined && sharedData.image != undefined)
+				client.postMessage({type: "shared-data", link: sharedData.link, image: sharedData.image});
+			else if(sharedData.error) 
+				client.postMessage({type: "shared-data", error: sharedData.error});
+		} 
+			
 	} 
 });
