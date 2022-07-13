@@ -67,7 +67,7 @@ Element.prototype.$$ = function (elem) {
 } 
 
 var reg;
-var currentAppVersion = "6.2.3.18";
+var currentAppVersion = "6.2.3.20";
 var deferredEvent;
 var storage = null;
 try {

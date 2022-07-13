@@ -1,4 +1,4 @@
-let version = "18";
+let version = "20";
 let cacheName = "Smart-Recharge-v:" + version;
 let sharedData = {};
 let appShellFiles = [
