@@ -123,7 +123,8 @@ const LoadingDone = async () => {
     else if(reg.waiting) {
     	InvokeSWUpdateFlow();
     } 
-    navigator.serviceWorker.controller.postMessage({type: "ready"});
+    if(navigator.serviceWorker.controller)
+    	navigator.serviceWorker.controller.postMessage({type: "ready"});
     history.pushState(null, "", "");
 } 
 
@@ -284,7 +285,7 @@ class Import {
         Stream.start();
     } 
     static click = (e) => {
-    	if(Stream.started)
+    	if(Stream.running)
         	Stream.pause();
     } 
 } 
@@ -318,7 +319,7 @@ const Home = () => {
     $(".main").style.display = "grid";
     $(".scan").style.display = "none";
     $(".recharged").style.display = "none";
-    if(Stream.started) Stream.pause();
+    if(Stream.running) Stream.pause();
 } 
 
 const Scan = async (anotherNo, cancel) => {
@@ -343,7 +344,7 @@ const Scan = async (anotherNo, cancel) => {
             return;
         } 
     } 
-    if(Stream.started) await Stream.pause();
+    if(Stream.running) await Stream.pause();
     let res = await Stream.start();
     if(!res.res) {
         Notify.popUpNote(res.error.message);
@@ -436,7 +437,7 @@ const Call = () => {
 }
 
 const Rescan = async () => {
-	if(Stream.started) await Stream.pause();
+	if(Stream.running) await Stream.pause();
     let res = await Stream.start();
     if(!res.res) {
         Notify.popUpNote(res.error.message);
@@ -483,7 +484,6 @@ class Stream {
     static started = false;
     static ready = false;
     static called = false;
-    static recognizing = false;
     static start = async () => {
         try {
         	if(!this.ready) {
@@ -492,7 +492,7 @@ class Stream {
         	} 
             this.stream = await navigator.mediaDevices.getUserMedia(CONSTRAINTS);
             this.laser.style.animationPlayState = "running";
-            this.started = true;
+            this.running = true;
             this.video.srcObject = this.stream;
             this.track = await this.stream.getVideoTracks()[0];
             this.video.setAttribute("onloadedmetadata", "Stream.getCapabilities()");
@@ -506,7 +506,7 @@ class Stream {
     } 
     static pause = async () => {
     	try {
-	        this.started = false;
+	        this.running = false;
 	        await this.video.pause();
 	        await this.track.stop();
 	        this.laser.style.animationPlayState = "paused";
@@ -542,9 +542,12 @@ class Stream {
 	        this.canvas.width = width;
 	        this.canvas.height = height;
 	        let ctx = this.canvas.getContext("2d");
+			ctx.filter = this.torch? "": "brightness(130%) contrast(100%)";
 	        ctx.drawImage(this.video, left, top, width, height, 0, 0, width, height);
 	        this.snapshot = this.canvas.toDataURL("image/png");
-	        await this.recognize(this.snapshot);
+	        let res = await this.recognize(this.snapshot);
+			if(!res && this.running) 
+				this.takeSnapshot();
 		} catch (error) {
 			reportError(error);
 		} 
@@ -560,7 +563,7 @@ class Stream {
             await this.worker.load();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');
-            await this.worker.setParameters({tessedit_char_whitelist: '0123456789 '});
+            await this.worker.setParameters({tessedit_char_whitelist: '0123456789'});
             this.ready = true;
             if(this.called)
             	await Scan(false);
@@ -569,8 +572,6 @@ class Stream {
         } 
     } 
     static recognize = async (img, importWindow, retake) => {
-    	if(this.recognizing) return;
-    	this.recognizing = true;
     	try {
 	        let res = await this.worker.recognize(img);
 	        let texts = res.data.text.split("\n");
@@ -580,9 +581,8 @@ class Stream {
 	                text = t;
 	        }
 			
-			this.recognizing = false;
 	        if(text.length > 7) {
-				if(this.started) this.pause();
+				if(this.running) this.pause();
 	            try {
 	                navigator.vibrate(150);
 	            } catch (error) {}
@@ -611,19 +611,18 @@ class Stream {
 	            await Edit.text();
 	            $(".hidden_footer").classList.remove("show", "hide");
 	            $(".hidden_footer").classList.add("show");
+				return true;
 	        } 
 	        else {
 	            if(importWindow) {
 	                if(retake) {
-						Notify.cancel();
-	                    Notify.popUpNote("Please ensure you crop the image to only expose the digital code.");
-	                    $(".crop .footer button").classList.remove("disable");
+						return false;
 	                } else {
 	                    await this.recognize(img, importWindow, true);
 	                } 
 	            } 
-	            else if(this.started) {
-	                this.takeSnapshot();
+	            else {
+	                return false;
 	            } 
 	        } 
 		} 
@@ -634,13 +633,17 @@ class Stream {
     static flashlight = async (on) => {
     	try {
 	        if(on) {
-	            this.track.applyConstraints({
-					advanced: [{torch: true}] 
-				}).then(() => {this.torch = on;}).catch((error) => console.log(error));
+	            await this.track.applyConstraints({
+					advanced: [{
+						fillLightMode: 'flash', 
+						torch: true, 
+					}] 
+				});
 	        } else {
 	            await this.pause();
 	            await this.start();
 	        } 
+			this.torch = on;
 		} 
 		catch (error) {
 			reportError(error);
@@ -783,7 +786,7 @@ class ImageProps {
 			reportError(error);
 		} 
     } 
-    static takeSnap = e => {
+    static takeSnap = async (e) => {
     	try {
 	        let props = this.getProps();
 	        this.cvs.height = props.h2;
@@ -798,7 +801,12 @@ class ImageProps {
 				header: "Scanning image...",
 				message: "Please wait"
 			});
-	        Stream.recognize(snap, $(".crop"));
+	        let res = await Stream.recognize(snap, $(".crop"));
+			if(!res) {
+				Notify.cancel();
+                Notify.popUpNote("Please ensure you crop the image to only expose the digital code.");
+                $(".crop .footer button").classList.remove("disable");
+            } 
 		} 
 		catch (error) {
 			reportError(error);

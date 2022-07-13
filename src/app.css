@@ -745,6 +745,9 @@ video {
     height: 100%;
     width: 100%;
     overflow: visible;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 } 
 
 .corner_frame {
