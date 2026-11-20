@@ -556,8 +556,8 @@ class Stream {
         try {
             let {createWorker} = Tesseract;
 			this.worker = createWorker({
-				workerPath: "./tesseract/worker.js",
-				corePath: "./tesseract/core.wasm.js",
+				workerPath: "./tesseract/worker.min.js",
+				corePath: "./tesseract/core",
 				langPath: "./tesseract/lang"
 			});
             await this.worker.load();
