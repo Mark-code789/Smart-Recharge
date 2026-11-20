@@ -27,7 +27,7 @@ let appShellFiles = [
 	"./src/app.css", 
 	"./src/version.js",
     "./eruda/eruda.min.js", 
-    "./tesseract/tesseract.js", 
+    "./tesseract/tesseract.min.js", 
     "./index.js",
     "./index.css",
     "./index.html",
