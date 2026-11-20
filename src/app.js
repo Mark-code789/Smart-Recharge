@@ -574,6 +574,7 @@ class Stream {
     static recognize = async (img, importWindow, retake) => {
     	try {
 	        let res = await this.worker.recognize(img);
+			console.log(res);
 	        let texts = res.data.text.split("\n");
 	        let text = "";
 	        for(let t of texts) {
