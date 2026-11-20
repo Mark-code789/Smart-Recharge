@@ -130,7 +130,7 @@ const LoadingDone = async () => {
 
 function reportError(error) {
 	console.log(error);
-	window.alert(JSON.stringify(error, Object.getOwnPropertyNames(error)));
+	//window.alert(JSON.stringify(error, Object.getOwnPropertyNames(error)));
 	Notify.popUpNote("ERROR MESSAGE<br><br>An error occurred<br>********<b>Description</b>********<br>" + error.message);
 } 
 
