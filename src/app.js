@@ -558,7 +558,8 @@ class Stream {
 			this.worker = createWorker({
 				workerPath: "./tesseract/worker.min.js",
 				corePath: "./tesseract/core",
-				langPath: "./tesseract/lang"
+				langPath: "./tesseract/lang", 
+				gzip: true
 			});
             await this.worker.load();
             await this.worker.loadLanguage('eng');
