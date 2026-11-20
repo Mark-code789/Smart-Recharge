@@ -84,7 +84,7 @@ function pageComplete () {
     const SheetLink = $$$("link", ["rel", "stylesheet", "href", "./src/app.css"]);
 	const JsLink1 = $$$("script", ["src", "./src/app.js"]);
 	const JsLink2 = $$$("script", ["src", "./src/version.js"]);
-	const JsLink3 = $$$("script", ["src", "./tesseract/tesseract.js"]);
+	const JsLink3 = $$$("script", ["src", "./tesseract/tesseract.min.js"]);
 
 	SheetLink.onload = (event) => LoadedExternalFiles.run(event);
 	JsLink1.onload = (event) => LoadedExternalFiles.run(event);
