@@ -119,7 +119,7 @@
     top: 150%;
     left: 50%;
     transform: translateX(-50%);
-    max-width: calc(100vw - 30px);
+    max-width: calc(100dvw - 30px);
     width: -webkit-max-content;
     width: -moz-max-content;
     width: -ms-max-content;
@@ -165,8 +165,8 @@
     align-items: center;
     justify-content: center;
     flex-flow: column nowrap;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     background: #00000077;
     color: #003673;
     padding: 15px 30px;
@@ -372,15 +372,15 @@
 /*main content styles*/
 .window {
     position: absolute; 
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     background: #003673;
 }
 
 .main {
     display: none;
-    grid-template-columns: 100vw;
-    grid-template-rows: 80px calc(100vh - 200px) 120px;
+    grid-template-columns: 100dvw;
+    grid-template-rows: 80px calc(100dvh - 200px) 120px;
 }
 
 h1, h2, h3, h4 {
@@ -611,8 +611,8 @@ hr {
 /*Other number window*/
 .other_number {
     display: none;
-    grid-template-columns: 100vw;
-    grid-template-rows: 80px calc(100vh - 80px);
+    grid-template-columns: 100dvw;
+    grid-template-rows: 80px calc(100dvh - 80px);
     justify-content: center;
     align-content: center;
 } 
@@ -638,7 +638,7 @@ hr {
 .input_form > .field {
     display: grid;
     grid-template-rows: 50px;
-    grid-template-columns: calc(90vw - 50px) 50px;
+    grid-template-columns: calc(90dvw - 50px) 50px;
     justify-content: center;
     align-content: center;
     height: 50px;
@@ -705,8 +705,8 @@ hr {
 /*Scan window*/
 .scan {
     display: none;
-    grid-template-columns: 100vw;
-    grid-template-rows: 90px calc(100vh - 90px);
+    grid-template-columns: 100dvw;
+    grid-template-rows: 90px calc(100dvh - 90px);
     justify-content: center;
     align-content: center;
     background: #0099B1;
@@ -851,10 +851,10 @@ video {
 .hidden_footer {
     display: block;
     position: absolute;
-    top: 100vh;
+    top: 100dvh;
     left: 0;
-    height: 50vh;
-    width: 100vw;
+    height: 50dvh;
+    width: 100dvw;
     background: #fff;
 } 
 
@@ -863,9 +863,9 @@ video {
 } 
 
 @keyframes slide-in {
-    0% {top: 100vh;
+    0% {top: 100dvh;
         transform: translateZ(0);}
-    100% {top: 50vh;
+    100% {top: 50dvh;
           transform: translateZ(0);}
 } 
 
@@ -874,9 +874,9 @@ video {
 } 
 
 @keyframes slide-out {
-    0% {top: 50vh;
+    0% {top: 50dvh;
         transform: translateZ(0);}
-    100% {top: 100vh;
+    100% {top: 100dvh;
           transform: translateZ(0);}
 } 
 
@@ -958,7 +958,7 @@ input[type="text"]:disabled {
 
 .hidden_footer .footer {
     position: relative;
-    top: calc(40vh - 140px);
+    top: calc(40dvh - 140px);
     left: 0;
     height: fit-content;
     width: 100%;
@@ -995,8 +995,8 @@ input[type="text"]:disabled {
 /*Crop window*/
 .crop {
     display: none;
-    grid-template-columns: 100vw;
-    grid-template-rows: 90px calc(100vh - 210px) 120px;
+    grid-template-columns: 100dvw;
+    grid-template-rows: 90px calc(100dvh - 210px) 120px;
     background: #0099B1;
 } 
 
@@ -1154,7 +1154,7 @@ input[type="text"]:disabled {
 
 @media only screen and (orientation: portrait) and (max-height: 350px) {
     :root {
-        --sim-height: calc(calc(100vh - 180px) * 0.8);
+        --sim-height: calc(calc(100dvh - 180px) * 0.8);
     } 
 }
 
@@ -1166,13 +1166,13 @@ input[type="text"]:disabled {
 
 @media only screen and (orientation: landscape) and (max-height: 350px) {
     :root {
-        --sim-height: calc(calc(100vh - 110px) * 0.8);
+        --sim-height: calc(calc(100dvh - 110px) * 0.8);
     } 
     .hidden_footer {
-        height: 100vh;
+        height: 100dvh;
     } 
     .hidden_footer .footer {
-        top: calc(100vh - 140px);
+        top: calc(100dvh - 140px);
     } 
 } 
 
@@ -1181,13 +1181,13 @@ input[type="text"]:disabled {
         width: 60px;
     } 
     .main {
-        grid-template-rows: 60px calc(100vh - 120px) 60px;
+        grid-template-rows: 60px calc(100dvh - 120px) 60px;
     }
     .sim {
         margin: 5px 10px;
     } 
     .other_number {
-        grid-template-rows: 100vh;
+        grid-template-rows: 100dvh;
     } 
     .other_number .header {
         display: none;
@@ -1199,6 +1199,6 @@ input[type="text"]:disabled {
         margin: 0 0 10px 0;
     } 
     .scan {
-        grid-template-rows: 70px calc(100vh - 70px);
+        grid-template-rows: 70px calc(100dvh - 70px);
     } 
 }
