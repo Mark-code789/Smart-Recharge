@@ -563,7 +563,7 @@ class Stream {
             await this.worker.load();
             await this.worker.loadLanguage('eng');
             await this.worker.initialize('eng');
-            await this.worker.setParameters({tessedit_char_whitelist: '0123456789'});
+            await this.worker.setParameters({tessedit_char_whitelist: '+0123456789'});
             this.ready = true;
             if(this.called)
             	await Scan(false);
