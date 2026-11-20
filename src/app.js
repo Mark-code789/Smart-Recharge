@@ -554,16 +554,14 @@ class Stream {
     } 
     static initTesseract = async () => {
         try {
-            let {createWorker} = Tesseract;
-			this.worker = createWorker({
+			this.worker = await Tesseract.createWorker({
 				workerPath: "./tesseract/worker.min.js",
 				corePath: "./tesseract/core",
 				langPath: "./tesseract/lang", 
+				workerBlobURL: false, 
 				gzip: true
 			});
-            await this.worker.load();
-            await this.worker.loadLanguage('eng');
-            await this.worker.initialize('eng');
+			
             await this.worker.setParameters({tessedit_char_whitelist: '+0123456789'});
             this.ready = true;
             if(this.called)
