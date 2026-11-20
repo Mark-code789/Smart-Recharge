@@ -555,11 +555,10 @@ class Stream {
     } 
     static initTesseract = async () => {
         try {
-			this.worker = await Tesseract.createWorker({
+			this.worker = await Tesseract.createWorker('eng', 1, {
 				workerPath: "./tesseract/worker.min.js",
 				corePath: "./tesseract/core",
 				langPath: "./tesseract/lang", 
-				workerBlobURL: false, 
 				gzip: true
 			});
 			
